@@ -40,6 +40,8 @@ fnm install --lts
 
 ## TypeScript + React + Jest + ESLint + Parcel 개발 환경 세팅
 
+[참고](https://github.com/ahastudio/til/blob/main/javascript/20181212-setup-javascript-project.md)
+
 ### 1. 작업 폴더를 준비
 
 ```
