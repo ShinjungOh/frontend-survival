@@ -21,7 +21,7 @@ Node.js 개발자가 새로 시작한 프로젝트
 
 * 훨씬 간단하지만, 사용하는 곳이 별로 없음
 * 기술의 최전선, 도전적인 느낌
-* https://deno.land/
+* [Deno](https://deno.land/)
 
 \
 \
@@ -120,9 +120,7 @@ npm init -y
 * \-y : npm init에 무조건 yes로 대답한다는 옵션\
 
 
-<figure><img src="https://github.com/ShinjungOh/TIL/raw/main/Images/npm_package.png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../../images/npm_package.png" alt="npm init"><figcaption></figcaption></figure>
+<figure><img src="https://github.com/ShinjungOh/TIL/raw/main/Images/npm_package.png" alt="npm_init_package.json"><figcaption></figcaption></figure>
 
 * name: `소문자-이름` 형태
 * version: 시맨틱 버전(Semantic Versioning)
@@ -148,9 +146,9 @@ npm init -y
 
 ⚠️ 최소한 `node_modules`를 통째로 커밋하는 일을 미연에 방지할 것
 
-* gitignore 생성 사이트 : https://www.toptal.com/developers/gitignore
+* [gitignore 생성 사이트](https://www.toptal.com/developers/gitignore)
   * node를 검색하면 맞춤으로 생성
-* github에서 기본 제공하는 gitignore : https://github.com/github/gitignore
+* [github에서 기본 제공하는 gitignore](https://github.com/github/gitignore)
   * 언어별 선택 가능
     * [Node.gitignore](https://github.com/github/gitignore/blob/main/Node.gitignore)
 
