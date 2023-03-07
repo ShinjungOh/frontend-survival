@@ -2,12 +2,12 @@
 
 ## 1. React란?
 
-웹 UI를 만들 수 있는 자바스크립트 라이브러리  
+사용자 인터페이스(웹 UI)를 만들기 위한 JavaScript 라이브러리   
 **컴포넌트**로 이루어짐 (컴포넌트 : 한 가지 기능을 수행하는 UI 단위)      
-[선언형 프로그래밍](https://ko.wikipedia.org/wiki/%EC%84%A0%EC%96%B8%ED%98%95_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)
+[선언형 프로그래밍](https://ko.wikipedia.org/wiki/%EC%84%A0%EC%96%B8%ED%98%95_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)  
 
 > **선언형 프로그래밍** ✅   
-> 바로 목적 서술, 목표를 명시      
+> 바로 목적 서술, 목표를 명시 → 예측 가능하고 디버깅 용이         
 > Ex. React  
 > 
 > **명령형 프로그래밍**   
@@ -15,11 +15,11 @@
 > Ex. jQuery, C, JAVA   
 
 
-> * [React 공식문서](https://ko.reactjs.org/)  
->   * 옛날 정보가 아직 업데이트 되지 않은 내용도 존재   
->   * Ex. [class 컴포넌트로 쓰인 자료](https://ko.reactjs.org/docs/thinking-in-react.html#step-2-build-a-static-version-in-react)  
-> * [React Beta 문서](https://beta.reactjs.org/)  
->   * ✨ 요즘 React 사용법을 다룬 문서(권장)   
+> * [React 공식문서](https://ko.reactjs.org/)    
+>   * 옛날 정보가 아직 업데이트 되지 않은 내용도 존재     
+>   * Ex. [class 컴포넌트로 쓰인 자료](https://ko.reactjs.org/docs/thinking-in-react.html#step-2-build-a-static-version-in-react)    
+> * [React Beta 문서](https://beta.reactjs.org/)    
+>   * ✨ 요즘 React 사용법을 다룬 문서(권장)     
 >   * 베타 버전/완성도가 낮음/한국어 번역 없음  
 >   * Ex. [공식문서의 내용을 함수형 컴포넌트로 설명한 자료 - thinking-in-react](https://beta.reactjs.org/learn/thinking-in-react)  
 
@@ -91,12 +91,42 @@ state가 변경될 때 리렌더링이 발생
 
 ## 4. IoC(Inversion of Control)
 
+> [제어의 역전](https://martinfowler.com/bliki/InversionOfControl.html)
+>
+> <em>"IoC containers의 부상으로 인해 사람들이 IoC(제어의 역전)의 의미에 혼란을 느낀다.    
+> IoC(제어의 역전)의 일반적인 원칙을, IoC containers가 사용하는 IoC(제어의 역전)의 특정 스타일(예: 의존성 주입)과 혼동한다."</em>
 
+제어의 역전  
+프로그래머가 작성한 프로그램이 재사용 라이브러리의 흐름 제어를 받게 되는 디자인 패턴    
 
+기존 → 작성한 프로그램이 외부 라이브러리의 코드를 호출해 이용  
+IoC이 적용된 구조 → 외부 라이브러리의 코드가 작성한 코드를 호출   
+
+[context API에서의 제어의 역전](https://ko.reactjs.org/docs/context.html#before-you-use-context)
+
+### IoC의 목적
+
+* 작업을 구현하는 방식과 작업 수행 자체를 분리
+* 모듈을 제작할 때, 모듈과 외부 프로그램의 결합에 대해 고민할 필요 없이 모듈의 목적에 집중
+* 다른 시스템이 어떻게 동작할지에 대해 고민할 필요 없이, 미리 정해진 협약대로만 동작하게 하면 됨
+* 모듈을 바꾸어도 다른 시스템에 부작용을 일으키지 않음
+
+### 의존성 주입
+
+의존성 주입(dependency injection)은 하나의 객체가 다른 객체의 의존성을 제공하는 테크닉  
+모듈 간 결합을 느슨하게 만듦  
 
 <br>
 
 ## 5. Library vs Framework
 
+### Q. React는 프레임워크인가요, 라이브러리인가요?  
 
+공식 문서의 표현 `사용자 인터페이스를 만들기 위한 JavaScript 라이브러리`
 
+IoC는 Framework을 정의하는 중요한 특징    
+React는 IoC를 통해 상태와 업데이트가 얽힌 복잡한 상황을 간단히 선언형 UI로 구성 (React의 첫 번째 특징)  
+그렇기 때문에 혼란이 발생할 수 있음    
+
+💡 일반적으로 IoC는 IoC 컨테이너와 엮여서 DI(Dependency injection, 의존성 주입)와 동의어처럼 쓰이고,   
+Next.js, Remix 등을 Framework이라고 부름  
