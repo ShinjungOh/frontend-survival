@@ -60,5 +60,7 @@ BDD라고 하면 프로게이머가 먼저 생각나는 나였는데 이제 당�
 - Test
   - 테스트 작성법
   - Describe-Context-It 패턴
-  - swc
   - 모킹
+- Parcel 
+  - 빌드
+  - SWC
