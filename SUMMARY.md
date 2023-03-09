@@ -9,3 +9,4 @@
   * [3. React](Week1/React/README.md)
   * [4. Testing Library](Week1/TestingLibrary/README.md)
   * [5. Parcel & ESLint](Week1/Parcel&ESLint/README.md)
+  * [한 주를 마치며](Week1/회고/README.md)
