@@ -119,6 +119,8 @@ TSlint가 따로 있었지만 ESLint에 흡수됨
 
 ### 기본 세팅 
 
+`.vscode` 폴더 생성 후 `settings.json` 파일 추가   
+
 ```json
 {
     "editor.rulers": [

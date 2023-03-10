@@ -99,6 +99,9 @@ code .
 > **npx**  
 > 로컬 또는 원격 npm 패키지에서 명령 실행  
 > `npm run`  
+> * `node_modules` 폴더의 `.bin` 안에 실행할 수 있는 것들이 담겨있음 (Ex. eslint, tsc 등)  
+>    `./node_modules/.bin/tsc` = `npx tsc`
+> * -D로 devdependencies 설치한 경우 npx로 실행할 수 있음 
 
 ```
 // package.json 파일 생성
@@ -164,7 +167,8 @@ npx tsc --init
 
 "jsx"의 주석을 해제하고, "jsx": "react-jsx"로 설정 변경
 
-[tsconfig 설정 참고 사이트](https://www.typescriptlang.org/tsconfig)
+[tsconfig 설정 참고 사이트](https://www.typescriptlang.org/tsconfig)  
+[jsx 설정](https://www.typescriptlang.org/ko/docs/handbook/jsx.html)
 
 
 ### 7. ESLint 설정
@@ -178,11 +182,44 @@ npm i -D eslint
 npx eslint --init
 ```
 
+```
+? How would you like to use ESLint? …
+❯ To check syntax, find problems, and enforce code style
+
+? What type of modules does your project use? …
+❯ JavaScript modules (import/export)
+
+? Which framework does your project use? …
+❯ React
+
+? Does your project use TypeScript?
+❯ Yes
+
+? Where does your code run? …
+✔ Browser
+
+? How would you like to define a style for your project? …
+❯ Use a popular style guide
+
+? Which style guide do you want to follow? …
+❯ XO: https://github.com/xojs/eslint-config-xo-typescript
+
+? What format do you want your config file to be in? …
+❯ JavaScript
+
+? Would you like to install them now with npm?
+❯ Yes
+
+? Which package manager do you want to use? … 
+❯ npm
+```
 
 ### 8. `.eslintrc.js` 파일을 적절히 수정
 
-.eslintrc.js에서 `.js`는 생략 가능하며, 없을 시 json 형식     
-아직 Jest를 설치하지 않았지만, 여기서 미리 env에 `jest: true`를 잡아주면 좋음   
+.eslintrc.js에서 `.js`는 생략 가능하며, 없을 시 json 형식
+
+1. 아직 Jest를 설치하지 않았지만, 여기서 미리 env에 `jest: true`를 잡아주면 좋음  
+2. extends에 `'plugin:react/jsx-runtime',` 추가 
 
 
 ### 9. `.eslintignore` 파일을 작성
