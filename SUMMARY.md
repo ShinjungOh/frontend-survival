@@ -10,3 +10,5 @@
   * [4. Testing Library](Week1/TestingLibrary/README.md)
   * [5. Parcel & ESLint](Week1/Parcel&ESLint/README.md)
   * [한 주를 마치며](Week1/회고/README.md)
+* [2주차](Week2/README.md)
+  * [1. JSX](Week2/JSX/README.md)
