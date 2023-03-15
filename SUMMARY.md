@@ -12,3 +12,4 @@
   * [한 주를 마치며](Week1/회고/README.md)
 * [2주차](Week2/README.md)
   * [1. JSX](Week2/JSX/README.md)
+  * [한 주를 마치며](Week2/회고/README.md)
