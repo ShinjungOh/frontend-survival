@@ -133,12 +133,16 @@ React.createElement(
 [Babel, JSX, 그리고 빌드 과정들](https://ko.reactjs.org/docs/faq-build.html)  
 [JSX 이해하기](https://ko.reactjs.org/docs/jsx-in-depth.html)
 
-JSX는 React.createElement를 쓰도록 JS 코드를 바꿔주는 것
-
+JSX는 React.createElement를 쓰도록 JS 코드를 바꿔주는 것  
+변환된 JS 코드는 Virtual DOM 트리를 바꿔주고, 그것과 화면을 비교해서 바뀐 부분만 업데이트(재조정 과정)  
+💡 이 접근방식을 통해 React의 **선언적 API**를 가능하게 만듦
 
 <br>
 
 ## 3. Syntactic sugar
+
+각 JSX 엘리먼트는 React.createElement(component, props, ...children)를 호출하기 위한 문법 설탕  
+그래서 JSX로 할 수 있는 모든 것은 순수 JavaScript로도 가능  
 
 <br>
 
@@ -202,16 +206,99 @@ function App() {
 
 ## 6. React StrictMode
 
+[React StrictMode](https://ko.reactjs.org/docs/strict-mode.html)
+
+StrictMode는 자손들에 대한 부가적인 **검사와 경고**를 활성화  
+개발 모드에서만 활성화되기 때문에, 프로덕션 빌드에는 영향을 끼치지 않음
+
+* 안전하지 않은 생명주기를 사용하는 컴포넌트 발견
+* 레거시 문자열 ref 사용에 대한 경고
+* 권장되지 않는 findDOMNode 사용에 대한 경고
+* 예상치 못한 부작용 검사
+* 레거시 context API 검사
+* Ensuring reusable state
+
+### StrictMode 활성화
+
+```jsx
+root.render((
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+));
+```
+
+* `<App />` 컴포넌트 각각의 자손까지 검사가 이루어짐
+
+> ⚠️ Ex. useEffect 등을 사용할 때 콘솔에 두 번씩 호출하는 경우  
+> 두 번 체크해서 두 결과가 다를 경우 함수의 사이드이펙트가 크다고 경고
+
+### React Developer Tools
+
+[React Developer Tools](https://github.com/facebook/react/tree/main/packages/react-devtools-extensions)
+
+1. 컴포넌트가 StrictMode 활성화 되어있지 않으면 경고   
+2. 내부적으로 VDOM 트리를 비슷하게 보여줌  
+
 <br>
 
-## 7. VDOM(Virtual DOM)이란?
+## 7. VDOM(Virtual DOM)
 
-<br>
+트리는 프랙탈과 같다. 트리의 구성요소는 트리다. 재귀적  
+우리는 매번 작은 React Element 트리, VDOM 트리를 만든다.
 
-### DOM이란?
+VDOM은 UI의 이상적인 또는 “가상”적인 표현을 메모리에 저장하고, ReactDOM과 같은 라이브러리에 의해 “실제” DOM과 동기화하는 프로그래밍 개념  
+특정 기술이라기보다는 패턴에 가까움   
+React에서 “virtual DOM”이라는 용어는 보통 사용자 인터페이스를 나타내는 객체이기 때문에 React elements와 연관됨 
+
+### 장점 
+
+1. 충분히 빠름   
+2. 유지보수 가능 (핵심)✨
+
+### Virtual DOM
+
+[Virtual DOM](https://ko.reactjs.org/docs/faq-internals.html#what-is-the-virtual-dom)
+
+Virtual DOM은 브라우저 API 위에 있는 JavaScript 라이브러리에서 구현되는 개념      
+이전의 **DOM Tree와 비교**해서 실질적으로 어떤 부분이 업데이트 돼야 하는지 계산해서 필요한 부분만 DOM Tree에 업데이트 **( = 재조정)**    
+**렌더링 전후에 변경된 부분만을 적용**    
+변환된 JS 코드는 Virtual DOM 트리를 바꿔주고, 그것과 화면을 비교해서 바뀐 부분만 업데이트   
+⇒ render 함수가 많이 호출되어도 성능을 크게 걱정하지 않아도 되는 이유  
+  
+* 리액트 컴포넌트가 메모리 상에 보관  
+* 60fps를 기본적으로 보장  
+
+### DOM
 
 ### DOM과 Virtual DOM의 차이
 
+fragment는 DOM에 없음 (DOM tree에 나타나지 않음)  
+Vue의 template이 그나마 비슷하고, Vue에서 적극적으로 활용됨  
+
+> 🔗 스벨트의 경우  
+<em>Virtual DOM 없어도 된다, Virtual DOM을 쓴다고 빨라지는 것은 아니다.</em>
+
 <br>
 
-## 8. Reconciliation(재조정) 과정은 무엇인가?
+## 8. Reconciliation(재조정) 과정
+
+[재조정 (Reconciliation)](https://ko.reactjs.org/docs/reconciliation.html)
+
+> 📢 새로 바뀐 데이터로 리액트 엘리먼트 만들어줘!    
+> 변환된 JS 코드를 효율적으로 그리는 것은 Virtual DOM으로 가능  
+> 이 접근방식이 React의 **선언적 API**를 가능하게 만듦
+
+React는 **선언적 API를 제공**하기 때문에 갱신이 될 때마다 매번 무엇이 바뀌었는지를 걱정할 필요가 없음    
+React 내부에서는 **비교 (diffing) 알고리즘**을 통해 **무엇이 변경되었는지** 계산이 일어남         
+⇒ 컴포넌트의 갱신이 **예측 가능**해지고, **빠른** 앱을 만들 수 있음
+
+### 성능 최적화
+
+[성능 최적화](https://ko.reactjs.org/docs/optimizing-performance.html)
+
+VDOM이 무엇이고, 왜 쓰는지 안다면 활용할 수 있는 성능 최적화 기법 
+
+> 📃 Ex. 긴 목록을 보여줄 때  
+> [1, 2, 3, 4, 5]가 [2, 3, 4, 5, 6]으로 바뀐 상황에서  
+> 1이 사라지고 6이 추가된 것을 처리하기 위해 key를 잡아줌  
