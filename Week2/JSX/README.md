@@ -141,8 +141,15 @@ JSX는 React.createElement를 쓰도록 JS 코드를 바꿔주는 것
 
 ## 3. Syntactic sugar
 
-각 JSX 엘리먼트는 React.createElement(component, props, ...children)를 호출하기 위한 문법 설탕  
-그래서 JSX로 할 수 있는 모든 것은 순수 JavaScript로도 가능  
+[Syntactic_sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)
+
+> <em>각 JSX 엘리먼트는 React.createElement(component, props, ...children)를 호출하기 위한 **문법 설탕**  
+> 그래서 JSX로 할 수 있는 모든 것은 순수 JavaScript로도 가능</em>  
+
+사물을 더 쉽게 표현할 수 있도록 설계된 프로그래밍 언어 내의 구문  
+더 명확하고 간결하게 사용할 수 있도록 대체하여 표현하는 스타일  
+더 짧고 읽고 쓰기가 쉬움  
+💡 **JSX를 순수 JavaScript만으로도 표현할 수 있지만, 더 길고 복잡하기 때문에 JSX를 사용**
 
 <br>
 
@@ -244,17 +251,17 @@ root.render((
 
 ## 7. VDOM(Virtual DOM)
 
-트리는 프랙탈과 같다. 트리의 구성요소는 트리다. 재귀적  
-우리는 매번 작은 React Element 트리, VDOM 트리를 만든다.
+> 🌳 트리는 프랙탈과 같음(재귀적), 트리의 구성요소는 트리  
+> 매번 작은 React Element 트리, VDOM 트리가 생성됨 
 
-VDOM은 UI의 이상적인 또는 “가상”적인 표현을 메모리에 저장하고, ReactDOM과 같은 라이브러리에 의해 “실제” DOM과 동기화하는 프로그래밍 개념  
+VDOM은 UI의 이상적, `가상적`인 표현을 메모리에 저장하고, ReactDOM과 같은 라이브러리에 의해 `실제` DOM과 동기화하는 프로그래밍 개념  
 특정 기술이라기보다는 패턴에 가까움   
-React에서 “virtual DOM”이라는 용어는 보통 사용자 인터페이스를 나타내는 객체이기 때문에 React elements와 연관됨 
+React에서 `virtual DOM`이라는 용어는 보통 사용자 인터페이스를 나타내는 객체이기 때문에 React elements와 연관됨 
 
-### 장점 
+### VDOM을 쓰는 이유
 
-1. 충분히 빠름   
-2. 유지보수 가능 (핵심)✨
+1. 충분히 빠름 - 속도를 내세울 정도로 매우 빠른 것은 아니지만, 충분히 빠름  
+2. 유지보수 용이 (핵심✨) - 예측 가능하기 때문에 유지보수가 용이 
 
 ### Virtual DOM
 
@@ -270,6 +277,23 @@ Virtual DOM은 브라우저 API 위에 있는 JavaScript 라이브러리에서 �
 * 60fps를 기본적으로 보장  
 
 ### DOM
+
+[DOM(Document Object Model)](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/Introduction)  
+[DOM은 정확히 무엇일까?](https://wit.nts-corp.com/2019/02/14/5522)
+
+웹 페이지에 대한 인터페이스  
+뷰 포트에 무엇을 렌더링 할지 결정하기 위해 사용  
+여러 프로그램들이 페이지의 콘텐츠 및 구조, 스타일을 읽고 조작할 수 있도록 API를 제공    
+🌳 브라우저가 HTML 파일을 읽으면서 브라우저가 이해할 수 있는 오브젝트 트리(DOM 트리)로 변환  
+
+#### DOM vs HTML
+
+DOM은 원본 HTML 문서의 객체 기반 표현 방식  
+둘은 서로 비슷하지만, 차이 존재
+
+* HTML 문서 : 내용과 구조가 단순 텍스트로 구성 
+* DOM : HTML 문서의 내용과 구조가 객체 모델로 변환되어, 다양한 프로그램에서 사용될 수 있음
+
 
 ### DOM과 Virtual DOM의 차이
 
