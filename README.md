@@ -18,3 +18,6 @@
   * Parcel & ESLint
 * 2주차
   * JSX
+* 3주차
+  * React Component
+  * React State
