@@ -13,3 +13,6 @@
 * [2주차](Week2/README.md)
   * [1. JSX](Week2/JSX/README.md)
   * [한 주를 마치며](Week2/회고/README.md)
+* [3주차](Week3/README.md)
+  * [1. React Component](Week3/ReactComponent/README.md)
+  * [2. React State](Week3/ReactState/README.md)
