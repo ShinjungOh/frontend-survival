@@ -225,6 +225,7 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 * 이대로 해야 한다가 아닌, 우리가 기존에 사용하고 있는 방법  
 * 개념적인 것
 * 원소들을 가지고 세상을 구성하듯 컴포넌트를 잘 조합해 원하는 것을 만들자는 의미
+* 컴포넌트를 잘게 나눌수록 atom에 가까워짐 
 
 <img src="https://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png">
 
@@ -255,3 +256,37 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 4. Information Architecture (JSON Schema의 영향) 
     * 실제로 엄청 많이 사용
     * 자연스러운 SRP를 위해서 사실상 강제됨
+
+### Extract Function
+
+> 🛠 **마틴 파울러 <리팩토링>**
+> 
+> 리팩토링에서 쓸 수 있는 기법   
+> * [Extract Function](https://refactoring.com/catalog/extractFunction.html)    
+> * [Inline Function](https://refactoring.com/catalog/inlineFunction.html)
+
+함수 추출은 SRP를 위해 자주 쓰이는 방법 중 하나   
+변화의 크기(영향 범위)를 제약
+
+* 일단 길게 코드를 작성하고, 적절히 자를 수 있는 부분이 보일 때 **함수로 추출**
+* 코드를 작성하기 어려운 상황에 직면했을 때 **함수로 추출**  
+
+💡 바로 다른 파일을 만들어야 한다고 생각하지 않아도 됨  
+컴포넌트를 나누는 기준이 애매하면 다시 **하나의 컴포넌트로 합쳤다가(Inline Method)** 다시 나눠줘도 됨
+
+### Props
+
+[Passing Props to a Component](https://beta.reactjs.org/learn/passing-props-to-a-component)    
+[Components와 Props](https://ko.reactjs.org/docs/components-and-props.html)  
+
+> <em>모든 React 컴포넌트는 자신의 props를 다룰 때 반드시 **순수 함수**처럼 동작해야 한다.</em>
+
+나눠진 컴포넌트를 서로 연결하는 방법  
+컴포넌트의 자체 props를 수정하면 안됨 
+⚠️ TypeScript를 잘 쓰거나 잘못 쓰게 되는 포인트 중 하나  
+적절한 균형점을 잡는 것이 중요
+
+> ❄️ **순수 함수**  
+> 
+> * 동일한 Input을 받았을 때, 항상 동일한 Output을 반환하는 함수
+> * 함수 사용 시, 함수 내에 사이드이펙트가 없어야 함
