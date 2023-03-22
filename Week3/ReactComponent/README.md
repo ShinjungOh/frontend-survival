@@ -8,7 +8,7 @@
 ### Start with the mockup
 
 * JSON API 
-* 디자이너의 목업 - 최종 결과물은 아니지만 뼈대가 되는  틀
+* 디자이너의 목업 - 최종 결과물은 아니지만 뼈대가 되는 틀
 
 ```bash
 # JSON API가 반환하는 예시 데이터 형태
@@ -51,7 +51,7 @@ React에서 정적 버전 빌드
 [GraphQL Playground](https://github.com/graphql/graphql-playground)  
 
 페이스북 개발 - 페이스북에서 발생하는 수많은 데이터를 처리하기 위함  
-불필요한 데이터까지 전부 받아와서 처리해야 하는 REST API와 달리, 필요한 데이터만 지정해서 요청할 수 있기 때문에 비용이 절감 💸  
+불필요한 데이터까지 전부 받아와서 처리해야 하는 REST API와 달리, 필요한 데이터만 지정해서 요청할 수 있기 때문에 **비용이 절감** 💸  
 facebook, airbnb, github 등 유명한 사이트에서 사용 중  
 
 * Graph 자료 구조
@@ -60,7 +60,7 @@ facebook, airbnb, github 등 유명한 사이트에서 사용 중
 * Query(Read), Mutation(Command: Create, Update, Delete), Subscription(Event)
 
 
-> ❓**질의어(query language)**
+> ❓ **질의어(query language)**
 > 
 > [질의어](https://ko.wikipedia.org/wiki/%EC%A7%88%EC%9D%98%EC%96%B4)  
 > 데이터베이스와 정보 시스템에 질의를 할 수 있게 하는 고급 컴퓨터 언어  
@@ -71,7 +71,7 @@ facebook, airbnb, github 등 유명한 사이트에서 사용 중
 #### 공통점
 
 1. HTTP 통신 
-   * HTTP : 텍스트, html을 전송하는 도구 -> 객체를 주고받을 수 없어서 텍스트로 표기 (JSON)
+   * HTTP : 텍스트, html을 전송하는 도구 → 객체를 주고받을 수 없어서 텍스트로 표기 (JSON)
    * JSON : 자바스크립트 객체 표기법
 
 2. 구성
@@ -81,16 +81,16 @@ facebook, airbnb, github 등 유명한 사이트에서 사용 중
 
 #### 차이점
 
-|         차이점         |               REST                |                   GRAPHQL                     |
-|:-------------------:|:---------------------------------:|:---------------------------------------------:|
-|     대규모 접속자 처리      |                어려움                |                      쉬움                       |
-|         형태          | 주소<br/>https://naver.com/board/1  |                함수<br/>board(1)                |
-|       응답 데이터        |              모든 데이터               |          필요한 데이터만 골라서 응답 -> **비용절감**          |
-| API에 전송을 요청하는 라이브러리 |               axios               |                 apollo-client                 |
-|       API 테스트       | 포스트맨<br/>https://www.postman.com/ | 플레이그라운드<br/>https://www.graphqlbin.com/v2/new |
-|       API 명세서       |    스웨거<br/>https://swagger.io/    | 플레이그라운드<br/>https://www.graphqlbin.com/v2/new |
+|         차이점         |               REST               |                   GRAPHQL                    |
+|:-------------------:|:--------------------------------:|:--------------------------------------------:|
+|     대규모 접속자 처리      |               어려움                |                      쉬움                      |
+|         형태          | 주소<br/>https://naver.com/board/1 |               함수<br/>board(1)                |
+|       응답 데이터        |              모든 데이터              |         필요한 데이터만 골라서 응답 -> **비용절감**          |
+| API에 전송을 요청하는 라이브러리 |              axios               |                apollo-client                 |
+|       API 테스트       | [포스트맨](https://www.postman.com/) | [플레이그라운드](https://www.graphqlbin.com/v2/new) |
+|       API 명세서       |    [스웨거](https://swagger.io/)    | [플레이그라운드](https://www.graphqlbin.com/v2/new) |
 
-* Graphql은 테스트와 명세서가 합쳐져 있어서 편리
+* GraphQL은 테스트와 명세서가 합쳐져 있어서 편리
 
 <br>
 
@@ -109,7 +109,7 @@ Javascript 객체 문법으로 구조화된 데이터를 표현하기 위한 표
 #### 장점 
 
 * 텍스트로 구성되어, 사람과 컴퓨터 모두 읽고 쓰기 쉬움
-* 프로그래밍 언어와 플랫폼에 독립적 -> 서로 다른 시스템 간 객체를 교환하기 용이 (언어가 달라도 소통 가능)
+* 프로그래밍 언어와 플랫폼에 독립적 → 서로 다른 시스템 간 객체를 교환하기 용이 (언어가 달라도 소통 가능)
 * api, config 파일에 활용
 * 가벼움
 
@@ -135,7 +135,7 @@ Javascript 객체 문법으로 구조화된 데이터를 표현하기 위한 표
   * JSON의 경우, JSON.parse 이용
 * XML의 태그는 이름이 정해져 있지 않음 (HTML과의 차이점)
 
-|        |       JSON        |         XML          |
+|  차이점   |       JSON        |         XML          |
 |:------:|:-----------------:|:--------------------:|
 |   무게   |        가벼움        |         무거움          |
 | JS 호환성 | 좋음<br/>JSON.parse | 나쁨<br/>오브젝트로 변환하기 복잡 |
@@ -188,7 +188,69 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 
 <br>
 
-## 7. SRP(단일 책임 원칙)
+## 7. React component 와 props
+
+### Component-Based
+
+✅ **React의 특징 중 하나**
+
+> <em>Build encapsulated components that manage their own state, then **compose** them to make **complex UIs**.   
+> 스스로 상태를 관리하는 캡슐화된 컴포넌트를 만드세요. 그리고 이를 **조합**해 **복잡한 UI**를 만들어보세요.</em>  
+⇒ **간단한 컴포넌트를 모아서 복잡한 UI를 조립**
+
+작은 컴포넌트=부품을 만들어서 조립  
+조합은 가지수를 폭발적으로 늘릴 수 있는 가장 전형적인 방법  
+⚙️ 조합하는 방식에 따라 적은 부품만 가지고도 다양하게 만들 수 있음
+
+### 컴포넌트를 나누는 기준
+
+1. SRP (Single Responsibility Principle)
+   * 컴포넌트가 너무 커질 경우 분리가 필요 (책임이 많고, 코드가 길어질 때)
+2. CSS
+   * 이미 알고 있는 기준을 재활용
+3. Design’s Layer (디자인 측면)
+   * 레이어도 트리 형태로 이루어짐
+4. Information Architecture (JSON Schema의 영향)
+   * 실제로 엄청 많이 사용
+   * 자연스러운 SRP를 위해서 사실상 강제됨
+
+### Extract Function
+
+> 🛠 **마틴 파울러 <리팩토링>**
+>
+> 리팩토링에서 쓸 수 있는 기법
+> * [Extract Function](https://refactoring.com/catalog/extractFunction.html)
+> * [Inline Function](https://refactoring.com/catalog/inlineFunction.html)
+
+함수 추출은 SRP를 위해 자주 쓰이는 방법 중 하나   
+변화의 크기(영향 범위)를 제약
+
+* 일단 길게 코드를 작성하고, 적절히 자를 수 있는 부분이 보일 때 **함수로 추출**
+* 코드를 작성하기 어려운 상황에 직면했을 때 **함수로 추출**
+
+💡 바로 다른 파일을 만들어야 한다고 생각하지 않아도 됨  
+컴포넌트를 나누는 기준이 애매하면 다시 **하나의 컴포넌트로 합쳤다가(Inline Method)** 다시 나눠줘도 됨
+
+### Props
+
+[Passing Props to a Component](https://beta.reactjs.org/learn/passing-props-to-a-component)    
+[Components와 Props](https://ko.reactjs.org/docs/components-and-props.html)
+
+> <em>모든 React 컴포넌트는 자신의 props를 다룰 때 반드시 **순수 함수**처럼 동작해야 한다.</em>
+
+나눠진 컴포넌트를 서로 연결하는 방법  
+컴포넌트의 자체 props를 수정하면 안됨  
+⚠️ TypeScript를 잘 쓰거나 잘못 쓰게 되는 포인트 중 하나  
+적절한 균형점을 잡는 것이 중요
+
+> ❄️ **순수 함수**
+>
+> * 동일한 Input을 받았을 때, 항상 동일한 Output을 반환하는 함수
+> * 함수 사용 시, 함수 내에 사이드이펙트가 없어야 함
+
+<br>
+
+## 8. SRP(단일 책임 원칙)
 
 [SRP (Single Responsibility Principle)](https://ko.wikipedia.org/wiki/단일_책임_원칙)
 
@@ -216,7 +278,7 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 
 <br>
 
-## 8. Atomic Design
+## 9. Atomic Design
 
 [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/)
 
@@ -227,66 +289,4 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 * 원소들을 가지고 세상을 구성하듯 컴포넌트를 잘 조합해 원하는 것을 만들자는 의미
 * 컴포넌트를 잘게 나눌수록 atom에 가까워짐 
 
-<img src="https://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png">
-
-<br>
-
-## 9. React component 와 props
-
-###Component-Based
-
-✅ **React의 특징 중 하나**
-
-> <em>Build encapsulated components that manage their own state, then **compose** them to make **complex UIs**.   
-> 스스로 상태를 관리하는 캡슐화된 컴포넌트를 만드세요. 그리고 이를 **조합**해 **복잡한 UI**를 만들어보세요.</em>  
-⇒ **간단한 컴포넌트를 모아서 복잡한 UI를 조립**  
-
-작은 컴포넌트=부품을 만들어서 조립  
-조합은 가지수를 폭발적으로 늘릴 수 있는 가장 전형적인 방법  
-⚙️ 조합하는 방식에 따라 적은 부품만 가지고도 다양하게 만들 수 있음
-
-### 컴포넌트를 나누는 기준
-
-1. SRP (Single Responsibility Principle)
-    * 컴포넌트가 너무 커질 경우 분리가 필요 (책임이 많고, 코드가 길어질 때)
-2. CSS 
-   * 이미 알고 있는 기준을 재활용
-3. Design’s Layer (디자인 측면)
-   * 레이어도 트리 형태로 이루어짐 
-4. Information Architecture (JSON Schema의 영향) 
-    * 실제로 엄청 많이 사용
-    * 자연스러운 SRP를 위해서 사실상 강제됨
-
-### Extract Function
-
-> 🛠 **마틴 파울러 <리팩토링>**
-> 
-> 리팩토링에서 쓸 수 있는 기법   
-> * [Extract Function](https://refactoring.com/catalog/extractFunction.html)    
-> * [Inline Function](https://refactoring.com/catalog/inlineFunction.html)
-
-함수 추출은 SRP를 위해 자주 쓰이는 방법 중 하나   
-변화의 크기(영향 범위)를 제약
-
-* 일단 길게 코드를 작성하고, 적절히 자를 수 있는 부분이 보일 때 **함수로 추출**
-* 코드를 작성하기 어려운 상황에 직면했을 때 **함수로 추출**  
-
-💡 바로 다른 파일을 만들어야 한다고 생각하지 않아도 됨  
-컴포넌트를 나누는 기준이 애매하면 다시 **하나의 컴포넌트로 합쳤다가(Inline Method)** 다시 나눠줘도 됨
-
-### Props
-
-[Passing Props to a Component](https://beta.reactjs.org/learn/passing-props-to-a-component)    
-[Components와 Props](https://ko.reactjs.org/docs/components-and-props.html)  
-
-> <em>모든 React 컴포넌트는 자신의 props를 다룰 때 반드시 **순수 함수**처럼 동작해야 한다.</em>
-
-나눠진 컴포넌트를 서로 연결하는 방법  
-컴포넌트의 자체 props를 수정하면 안됨 
-⚠️ TypeScript를 잘 쓰거나 잘못 쓰게 되는 포인트 중 하나  
-적절한 균형점을 잡는 것이 중요
-
-> ❄️ **순수 함수**  
-> 
-> * 동일한 Input을 받았을 때, 항상 동일한 Output을 반환하는 함수
-> * 함수 사용 시, 함수 내에 사이드이펙트가 없어야 함
+<img src="https://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png" width="800">
