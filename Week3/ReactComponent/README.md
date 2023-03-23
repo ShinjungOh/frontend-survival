@@ -3,7 +3,9 @@
 ## 1. Thinking in React
 
 > 📌 [Thinking in React](https://react.dev/learn/thinking-in-react)  
-> 리액트를 이용하는 기초
+> 리액트를 이용하는 기초  
+> 
+> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/tree/main/2023-03-21)
 
 ### Start with the mockup
 
@@ -85,7 +87,7 @@ facebook, airbnb, github 등 유명한 사이트에서 사용 중
 |:-------------------:|:--------------------------------:|:--------------------------------------------:|
 |     대규모 접속자 처리      |               어려움                |                      쉬움                      |
 |         형태          | 주소<br/>https://naver.com/board/1 |               함수<br/>board(1)                |
-|       응답 데이터        |              모든 데이터              |         필요한 데이터만 골라서 응답 -> **비용절감**          |
+|       응답 데이터        |              모든 데이터              |          필요한 데이터만 골라서 응답 → **비용절감**          |
 | API에 전송을 요청하는 라이브러리 |              axios               |                apollo-client                 |
 |       API 테스트       | [포스트맨](https://www.postman.com/) | [플레이그라운드](https://www.graphqlbin.com/v2/new) |
 |       API 명세서       |    [스웨거](https://swagger.io/)    | [플레이그라운드](https://www.graphqlbin.com/v2/new) |
@@ -238,10 +240,16 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 
 > <em>모든 React 컴포넌트는 자신의 props를 다룰 때 반드시 **순수 함수**처럼 동작해야 한다.</em>
 
-나눠진 컴포넌트를 서로 연결하는 방법  
+컴포넌트에 데이터를 전달하는 방법, 나눠진 컴포넌트를 서로 연결하는 방법    
 컴포넌트의 자체 props를 수정하면 안됨  
 ⚠️ TypeScript를 잘 쓰거나 잘못 쓰게 되는 포인트 중 하나  
 적절한 균형점을 잡는 것이 중요
+
+* 부모 컴포넌트가 자식 컴포넌트에 전달
+* 값에 이름을 붙여서 전달
+* properties의 줄임말
+* 정적, 동적 데이터(state), 컴포넌트 전달 가능
+* 자식 컴포넌트의 props가 바뀔 때마다, 부모 컴포넌트가 re-render 될 때마다 re-render됨
 
 > ❄️ **순수 함수**
 >
@@ -289,4 +297,4 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 * 원소들을 가지고 세상을 구성하듯 컴포넌트를 잘 조합해 원하는 것을 만들자는 의미
 * 컴포넌트를 잘게 나눌수록 atom에 가까워짐 
 
-<img src="https://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png" width="800">
+<img src="https://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png" alt="atomic-design" width="100%">
