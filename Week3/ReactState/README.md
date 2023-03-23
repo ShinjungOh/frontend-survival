@@ -113,7 +113,7 @@ useState를 통해 반환받은 첫 번째 값은 항상 갱신된 최신 state
 
 [참고 자료](https://github.com/ShinjungOh/TIL/blob/main/React/react%20useState%20%EC%83%81%ED%83%9C%20%EA%B0%92%20%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8.md)
 
-<img src="https://raw.githubusercontent.com/ShinjungOh/TIL/main/Images/javascript_runtime_setState.webp" alt="javascript_runtime" width="100%">
+<figure><img src="https://raw.githubusercontent.com/ShinjungOh/TIL/main/Images/javascript_runtime_setState.webp" alt="javascript_runtime" width="100%"></figure>
 
 1. setState가 콜스택에 들어감 
    * 콜스택에는 한 번에 하나의 함수만 등록

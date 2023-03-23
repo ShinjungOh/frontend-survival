@@ -297,4 +297,4 @@ React는 선언적 API를 제공하기 때문에 갱신이 될 때마다 매번 
 * 원소들을 가지고 세상을 구성하듯 컴포넌트를 잘 조합해 원하는 것을 만들자는 의미
 * 컴포넌트를 잘게 나눌수록 atom에 가까워짐 
 
-<img src="https://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png" alt="atomic-design" width="100%">
+<figure><img src="https://bradfrost.com/wp-content/uploads/2013/06/atomic-design.png" alt="atomic-design" width="100%"></figure>
