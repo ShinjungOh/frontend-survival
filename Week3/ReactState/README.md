@@ -23,7 +23,18 @@ UI 상태의 최소한의, 완벽한 표현 찾기
 
 [React state](https://ko.reactjs.org/docs/thinking-in-react.html#step-3-identify-the-minimal-but-complete-representation-of-ui-state)
 
-애플리케이션이 가지는 state
+React의 state는 **변경**을 다루기 위한 요소  
+
+### Re-render
+
+state가 변경될 때 리렌더링이 발생  
+어떤 컴포넌트의 state가 바뀌면 **해당 state를 가지고 있는 컴포넌트**와 **하위 컴포넌트**를 다시 렌더링  
+리렌더링은 모든 컴포넌트의 render를 호출하는 것이지, React가 언마운트시키고 다시 마운트하는 것은 아님
+
+### state의 기준
+
+애플리케이션이 가지는 state  
+❗️ 데이터가 있다고 해서 다 state인 것은 아님
 
 * 사용자가 입력한 검색어 
 * 체크박스의 값
@@ -31,12 +42,21 @@ UI 상태의 최소한의, 완벽한 표현 찾기
 > 📌 **React State의 조건**
 > 
 > 1. 부모로부터 props를 통해 전달되는가? 그러면 state가 아니다.
-> 2. 시간이 지나도 변하지 않는가? 그러면 state가 아니다. → 변경되야 함 
-> 3. 컴포넌트 안의 다른 state나 props를 가지고 계산 가능한가? 그러면 state가 아니다. → 계산 가능해야 함
+> 2. 시간이 지나도 변하지 않는가? 그러면 state가 아니다. → **변경되야 함** 
+> 3. 컴포넌트 안의 다른 state나 props를 가지고 계산 가능한가? 그러면 state가 아니다. → **✨ 계산이 불가능해야 함**
 
-💡 **DRY 원칙이 핵심**   
+### 주의점
+
+1. 💡 **DRY 원칙이 핵심**   
+아무렇게나 만들어도 되지만, 일관성과 효율을 위해 **DRY 원칙을 따르는 SSOT**를 만들기   
 애플리케이션이 필요로 하는 **가장 최소한의 state**를 찾고 이를 통해 나머지 모든 것들이 필요에 따라 그때그때 계산되도록 만들 것  
 
+2. TypeScript 이용하기  
+다루는 상태가 너무 많으면 복잡함  
+`interface`, `type` 등 TypeScript를 잘 활용해서 상태를 묶으면, 직접 관리하는 상태의 수를 줄일 수 있음   
+   * props를 넘겨주기 쉬움
+   * 재사용 편리
+   
 <br>
 
 ## 3. DRY 원칙
@@ -76,12 +96,11 @@ UI 상태의 최소한의, 완벽한 표현 찾기
 
 [Lifting State Up](https://ko.reactjs.org/docs/lifting-state-up.html)
 
-다루는 상태가 너무 많으면 복잡함  
-TypeScript를 잘 쓰면 직접 관리하는 상태의 수를 줄여줄 수 있음  
+더 이상 올라갈 필요가 없을 때까지 상태를 끌어올리는 것  
 
 > 👨‍👩‍👧‍👦 **상태를 누가 관리하고, 소유해야 할까?**
 > 
-> (React만 사용할 경우) 해당 상태에 의존적인 컴포넌트를 **모두 포함하는 컴포넌트**가 상태를 소유해야 함
+> (React만 사용할 경우) 해당 상태에 의존적인 컴포넌트를 **모두 포함하는 컴포넌트**가 상태를 소유해야 함  
 
 <br>
 
@@ -99,15 +118,22 @@ Hook을 이용하여 기존 Class 바탕의 코드를 작성할 필요 없이 �
 const [state, setState] = useState(initialState);
 ```
 
-`상태값`과 `그 값을 갱신하는 함수`를 반환  
+**`상태값`**과 **`그 값을 갱신하는 함수`**를 반환  
 최초로 렌더링을 하는 동안, 반환된 state는 초기값(initialState)과 같음  
 
 ```jsx
 setState(newState);
 ```
+
 setState 함수는 state를 갱신할 때 사용  
 새 state 값을 받아 컴포넌트 리렌더링을 큐에 등록  
 useState를 통해 반환받은 첫 번째 값은 항상 갱신된 최신 state
+
+```jsx
+setState((prevState) => prevState + 1);
+```
+
+기존 상태를 얻고싶을 때는 함수를 넣어줌
 
 ### setState의 비동기 처리
 
@@ -125,12 +151,29 @@ useState를 통해 반환받은 첫 번째 값은 항상 갱신된 최신 state
 
 <br>
 
-## 7. 1급 객체(first-class object)
+## 7. Inverse Data Flow
+
+[역방향 데이터 흐름 추가하기](https://ko.reactjs.org/docs/thinking-in-react.html#step-5-add-inverse-data-flow)
+
+> 계층 구조의 하위에 있는 폼 컴포넌트에서 상위 컴포넌트의 state 업데이트하기  
+> 상위 컴포넌트에서 전달된 콜백 함수는 setState()를 호출하고 앱을 업데이트 
+
+데이터를 위에서 아래로 보낼 때는 props를 통해 전달 ⬇️  
+데이터를 아래에서 위로 보낼 때는 하위 컴포넌트의 props로 함수를 전달(흔히 **콜백 함수**라고 부름) ⬆️    
+
+TypeScript(정확히는 JavaScript)에서는 **함수가 일급(first-class) 객체**이기 때문에,
+어떤 함수를 다른 함수에 인자로 넘겨주거나, 어떤 함수를 리턴값으로 사용할 수 있음   
+익명 함수, 클로저 등과 함께 사용하면 시너지가 큼
+
+<br>
+
+## 8. 1급 객체(first-class object)
 
 [1급 객체](https://ko.wikipedia.org/wiki/%EC%9D%BC%EA%B8%89_%EA%B0%9D%EC%B2%B4)
 
 다른 객체들에 일반적으로 적용 가능한 연산을 모두 지원하는 객체   
 함수에 인자로 넘기기, 수정하기, 변수에 대입하기와 같은 연산을 지원할 때 일급 객체라고 부름  
+[JavaScript에서는 함수가 1급 객체](https://soeunlee.medium.com/javascript%EC%97%90%EC%84%9C-%EC%99%9C-%ED%95%A8%EC%88%98%EA%B0%80-1%EA%B8%89-%EA%B0%9D%EC%B2%B4%EC%9D%BC%EA%B9%8C%EC%9A%94-cc6bd2a9ecac) 
 
 ### 일급 함수
 
@@ -141,11 +184,3 @@ useState를 통해 반환받은 첫 번째 값은 항상 갱신된 최신 state
 
 * 콜백 함수 : 다른 함수에 인자로 전달된 함수(제어권을 넘겨준 함수)
 * 고차 함수 : 함수를 반환하는 함수
-
-### Inverse Data Flow
-
-하위 컴포넌트의 props로 함수를 전달(흔히 콜백 함수라고 부름)  
-TypeScript(정확히는 JavaScript)는 함수가 일급(first-class) 객체  
-어떤 함수를 다른 함수에 인자로 넘겨주거나, 어떤 함수를 리턴값으로 사용할 수 있음   
-익명 함수, 클로저 등과 함께 사용하면 시너지가 큼
-
