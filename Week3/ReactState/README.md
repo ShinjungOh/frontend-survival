@@ -4,6 +4,8 @@
 
 > 📌 [Thinking in React](https://react.dev/learn/thinking-in-react)  
 > 리액트를 이용하는 기초
+>
+> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/tree/main/2023-03-21)
 
 ### Step 3: Find the minimal but complete representation of UI state
 
@@ -118,7 +120,7 @@ Hook을 이용하여 기존 Class 바탕의 코드를 작성할 필요 없이 �
 const [state, setState] = useState(initialState);
 ```
 
-**`상태값`**과 **`그 값을 갱신하는 함수`**를 반환  
+`상태값`과 `그 값을 갱신하는 함수`를 반환  
 최초로 렌더링을 하는 동안, 반환된 state는 초기값(initialState)과 같음  
 
 ```jsx
@@ -159,7 +161,7 @@ setState((prevState) => prevState + 1);
 > 상위 컴포넌트에서 전달된 콜백 함수는 setState()를 호출하고 앱을 업데이트 
 
 데이터를 위에서 아래로 보낼 때는 props를 통해 전달 ⬇️  
-데이터를 아래에서 위로 보낼 때는 하위 컴포넌트의 props로 함수를 전달(흔히 **콜백 함수**라고 부름) ⬆️    
+데이터를 아래에서 위로 보낼 때는 하위 컴포넌트의 props로 함수를 전달(상태를 변경할 수 있는 **콜백 함수**) ⬆️    
 
 TypeScript(정확히는 JavaScript)에서는 **함수가 일급(first-class) 객체**이기 때문에,
 어떤 함수를 다른 함수에 인자로 넘겨주거나, 어떤 함수를 리턴값으로 사용할 수 있음   
