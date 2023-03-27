@@ -4,7 +4,7 @@
 
 * [megaptera-front](README.md)
 * [1주차](Week1/README.md)
-  * [1. 개발 환경](Week1/개발환경/README.md)
+  * [1. 개발 환경](Week1/environment/README.md)
   * [2. TypeScript](Week1/TypeScript/README.md)
   * [3. React](Week1/React/README.md)
   * [4. Testing Library](Week1/TestingLibrary/README.md)
@@ -17,3 +17,9 @@
   * [1. React Component](Week3/ReactComponent/README.md)
   * [2. React State](Week3/ReactState/README.md)
   * [한 주를 마치며](Week3/회고/README.md)
+* [4주차](Week4/README.md)
+  * [1. Express](Week4/Express/README.md)
+  * [2. Fetch API & CORS](Week4/FetchAPI&CORS/README.md)
+  * [3. React의 Hook](Week4/ReactHook/README.md)
+  * [4. useRef & Custom Hook](Week4/useRef&CustomHook/README.md)
+  * [5. usehooks-ts](Week4/usehooks-ts/README.md)

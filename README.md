@@ -10,14 +10,20 @@
 
 ## 목차
 
-* 1주차 
+* `1주차` 
   * 개발 환경
   * TypeScript
   * React
   * Testing Library
   * Parcel & ESLint
-* 2주차
+* `2주차`
   * JSX
-* 3주차
+* `3주차`
   * React Component
   * React State
+* `4주차`
+  * Express 
+  * Fetch API & CORS 
+  * React의 Hook 
+  * useRef & Custom Hook 
+  * usehooks-ts
