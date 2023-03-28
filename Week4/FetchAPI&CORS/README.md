@@ -14,7 +14,7 @@
 
 [Promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise)  
 
-Promise 객체는 비동기 작업이 맞이할 미래의 완료 또는 실패와 그 결과 값을 나타냄
+Promise 객체는 비동기 작업이 맞이할 미래의 **완료** 또는 **실패**와 그 **결과 값**을 나타냄
 
 Promise는 프로미스가 생성된 시점에는 알려지지 않았을 수도 있는 값을 위한 대리자   
 비동기 연산이 종료된 이후에 **결과 값과 실패 사유**를 처리하기 위한 처리기를 연결할 수 있음   
@@ -116,21 +116,38 @@ const response = fetch(url, {
 
 [동일 출처 정책](https://developer.mozilla.org/ko/docs/Web/Security/Same-origin_policy)  
 
-**웹 브라우저가 가진** 기본 보안 정책 
+> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/commit/95842f87e3d714f10a98e565bb40593b248a8088)
 
-> 개발자 도구의 네트워크 탭에서 살펴보면 서버에서 response 응답은 오지만(🟢 200 OK) 동일 출처가 아니기 때문에 브라우저에서 막는다. → 오류 발생    
+**웹 브라우저가 가진** 기본 보안 정책   
+어떤 출처에서 불러온 문서나 스크립트가 **다른 출처**에서 가져온 리소스와 상호작용하는 것을 **제한**하는 보안 방식
 
-웹 브라우저는 **Same Origin Policy**에 따라 웹 페이지와 리소스를 요청한 곳(여기서는 REST API 서버)이 서로 다른 출처(포트까지 포함)일 때, 
-서버에서 얻은 결과를 사용할 수 없게 막음  
+> 🚨 **에러 메시지**   
+> 
+> Access to fetch at 'http://localhost:3000/products' 
+> from origin 'http://localhost:8080' has been blocked by CORS policy: 
+> No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+> If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled  
+> 
+> 개발자 도구의 네트워크 탭에서 살펴보면 서버에서 response 응답은 오지만(🟢 200 OK) 동일 출처가 아니기 때문에 브라우저에서 막힘 → 오류 발생    
+
+웹 브라우저는 **Same Origin Policy**에 따라 웹 페이지와 리소스를 요청한 곳(여기서는 REST API 서버)이 서로 다른 출처(포트까지 포함)일 때, 서버에서 얻은 결과를 사용할 수 없게 막음  
 ⚠️ 서버에 요청하고 응답을 받아오는 것까지는 이미 진행이 다 된 상황
+
+* 잠재적으로 해로울 수 있는 문서를 분리해, 공격받을 수 있는 경로를 줄여줌
+* CORS를 사용해 교차 출처 접근을 허용할 수 있음
 
 ### 교차 출처 리소스 공유 (CORS)
 
 [교차 출처 리소스 공유 (CORS)](https://developer.mozilla.org/ko/docs/Web/HTTP/CORS)
 
+CORS는 HTTP의 일부로, 어떤 호스트에서 자신의 콘텐츠를 불러갈 수 있는지 **서버에 지정**할 수 있는 방법  
 출처가 다른 곳이어도 괜찮으며 리소스를 공유할 것이라고 **서버(리소스를 제공하는 곳)** 에서 알려줌  
+
 * REST API 서버에서 `Headers`에 `Access-Control-Allow-Origin` 속성을 추가
 * Express에서는 [CORS 미들웨어](https://expressjs.com/en/resources/middleware/cors.html) 를 설치해서 사용
+
+추가 HTTP 헤더를 사용해, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제  
+웹 애플리케이션은 리소스가 **자신의 출처(도메인, 프로토콜, 포트)와 다를 때** 교차 출처 HTTP 요청을 실행
 
 ### 패키지 설치
 
