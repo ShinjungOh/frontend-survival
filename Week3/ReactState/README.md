@@ -5,7 +5,7 @@
 > 📌 [Thinking in React](https://react.dev/learn/thinking-in-react)  
 > 리액트를 이용하는 기초
 >
-> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/tree/main/2023-03-21)
+> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/tree/de928329e1d9b1cb78265dda3504334a953a7c9d/2023-03-21)
 
 ### Step 3: Find the minimal but complete representation of UI state
 

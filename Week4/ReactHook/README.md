@@ -142,12 +142,6 @@ useEffect(didUpdate);
 > React의 class 생명주기 메소드에 친숙하다면, 
 > useEffect Hook을 componentDidMount와 componentDidUpdate, componentWillUnmount가 합쳐진 것으로 생각해도 좋음
 
-#### 의존성 배열을 이용해 Fetch할 때 주의사항
-
-[Fetching data](https://react.dev/learn/synchronizing-with-effects#fetching-data)
-
-빈 배열([])을 전달한다면 effect 안에 있는 props와 state는 항상 초기값을 가지게 될 것  
-
 
 ### useContext
 
@@ -214,12 +208,157 @@ useLayoutEffect의 내부에 예정된 갱신은 브라우저가 화면을 그�
 
 <br>
 
-## 3. React StrictMode
+## 3. useEffect 타이머 예제
+
+> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/commit/144950dcc123fb9c573fc728b481d8f1f100b902)
+
+React의 외부에 우아하게 접근  
+이 정도는 useEffect를 안 쓴다고 크게 문제가 되지 않지만, 이렇게 쓰는 습관을 들이면 좋음  
+되도록이면 함수를 이펙트 안으로 옮기기 
+
+```jsx
+useEffect(() => {
+    document.title = `Now: ${new Date().getTime()}`;
+});
+```
+
+타이머를 on/off하는 기능을 그냥 만들면 문제가 발생
+
+```jsx
+// TimerControl.tsx
+
+function Timer() {
+  useEffect(() => {
+    setInterval(() => {
+        document.title = `Now: ${new Date().getTime()}`;
+    }, 100);
+  });
+
+  return (
+      <p>Playing</p>
+  );
+}
+
+export default function TimerControl() {
+  const [playing, setPlaying] = useState(false);
+
+  const handleClick = () => {
+    setPlaying(!playing);
+  };
+
+  return (
+      <div>
+        {playing ? (
+            <Timer />
+        ) : (
+            <p>Stop</p>
+        )}
+        <button type="button" onClick={handleClick}>Toggle</button>
+      </div>
+  );
+}
+```
+
+* 토글을 눌러 setInterval을 끄려고 해도 계속 실행되는 오류  
+
+### 종료 처리
+
+함수를 리턴해서 clean-up
+
+```jsx
+// TimerControl.tsx
+
+useEffect(() => {
+    const savedTitle = document.title;
+    
+    const id = setInterval(() => {
+        document.title = `Now: ${new Date().getTime()}`;
+        }, 100);
+    
+    return () => {
+        document.title = savedTitle;
+        clearInterval(id);
+    };
+});
+```
+
+### 의존성 배열
+
+의존성 배열에서 아무 것도 지정하지 않으면 **맨 처음에 딱 한번**만 실행  
+주로 API를 호출해서 데이터를 얻을 때 사용  
+빈 배열([])을 전달한다면 effect 안에 있는 props와 state는 항상 초기값을 가지게 될 것
+
+```jsx
+export default function TimerControl() {
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+        console.log('effect');
+        }, []);
+
+  return (
+        <div>
+          <button type='button' onClick={() => setCount(count + 1)}>Increase</button>
+        </div>
+    )
+}
+```
+
+🚨 `onClick={() => setCount(count + 1)}`을 `onClick={setCount(count + 1)}`로 잘못 쓴다면 무한 리렌더링 발생  
+
+### 처음에 한번만 실행하기
+
+의존성 배열이 없을 경우 무한 리렌더링  
+
+products를 얻는 곳에서 사용(데이터를 불러오는 맨 처음) 
+
+```jsx
+// App.tsx
+
+const [products, setProducts] = useState<Product[]>([]);
+
+useEffect(() => {
+    const fetchProducts = async () => {
+        const url = 'http://localhost:3000/products';
+        const response = await fetch(url);
+        const data = await response.json();
+        setProducts(data.products);
+    };
+    fetchProducts();
+}, []);
+```
+
+#### 의존성 배열을 이용해 Fetch할 때 주의사항
+
+[Fetching data](https://react.dev/learn/synchronizing-with-effects#fetching-data)
+
+```jsx
+useEffect(() => {
+  let ignore = false;
+
+  async function startFetching() {
+    const json = await fetchTodos(userId);
+    if (!ignore) {
+      setTodos(json);
+    }
+  }
+
+  startFetching();
+
+  return () => {
+    ignore = true;
+  };
+}, [userId]);
+```
+
+<br>
+
+## 4. React StrictMode
 
 [React StrictMode](https://ko.reactjs.org/docs/strict-mode.html)
 
 StrictMode는 자손들에 대한 부가적인 검사와 경고를 활성화  
-개발 모드에서만 활성화되기 때문에, 프로덕션 빌드에는 영향을 끼치지 않음
+**개발 모드**에서만 활성화되기 때문에, 프로덕션 빌드에는 영향을 끼치지 않음
 
 * 안전하지 않은 생명주기를 사용하는 컴포넌트 발견
 * 레거시 문자열 ref 사용에 대한 경고
@@ -245,6 +384,6 @@ root.render((
 > ⚠️ **useEffect 등을 사용할 때 두 번 실행되는 문제(콘솔에 두 번씩 호출 출력)**
 >
 > [예상치 못한 부작용 검사](https://ko.reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)  
-> <React.StrictMode>로 컴포넌트 전체를 감쌀 경우, 예상치 못한 사이드 이펙트를 찾으려고 Effect 등을 두 번씩 실행     
+> <React.StrictMode>로 컴포넌트 전체를 감쌀 경우, 예상치 못한 사이드 이펙트를 찾으려고 Effect 등을 두 번씩 실행       
 > 두 번 체크해서 두 결과가 다를 경우 함수의 사이드 이펙트가 크다고 경고   
 > 평소에는 큰 문제가 없지만, API 등을 사용하면 이상하다고 느낄 수 있으니 참고  
