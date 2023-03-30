@@ -126,7 +126,7 @@ const response = fetch(url, {
 > Access to fetch at 'http://localhost:3000/products' 
 > from origin 'http://localhost:8080' has been blocked by CORS policy: 
 > No 'Access-Control-Allow-Origin' header is present on the requested resource. 
-> If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled  
+> If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.  
 > 
 > 개발자 도구의 네트워크 탭에서 살펴보면 서버에서 response 응답은 오지만(🟢 200 OK) 동일 출처가 아니기 때문에 브라우저에서 막힘 → 오류 발생    
 
@@ -140,6 +140,7 @@ const response = fetch(url, {
 
 [교차 출처 리소스 공유 (CORS)](https://developer.mozilla.org/ko/docs/Web/HTTP/CORS)
 
+Cross-Origin Resource Sharing  
 CORS는 HTTP의 일부로, 어떤 호스트에서 자신의 콘텐츠를 불러갈 수 있는지 **서버에 지정**할 수 있는 방법  
 출처가 다른 곳이어도 괜찮으며 리소스를 공유할 것이라고 **서버(리소스를 제공하는 곳)** 에서 알려줌  
 
@@ -149,14 +150,16 @@ CORS는 HTTP의 일부로, 어떤 호스트에서 자신의 콘텐츠를 불러�
 추가 HTTP 헤더를 사용해, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제  
 웹 애플리케이션은 리소스가 **자신의 출처(도메인, 프로토콜, 포트)와 다를 때** 교차 출처 HTTP 요청을 실행
 
-### 패키지 설치
+### 사용 방법 
+
+#### 패키지 설치
 
 ```bash
 npm i cors
 npm i -D @types/cors
 ```
 
-### CORS 미들웨어 사용
+#### CORS 미들웨어 사용
 
 ```jsx
 import express from 'express';

@@ -260,5 +260,14 @@ http localhost:3000/products
 
 `res.send({ products });` : JSON으로 자동 변환
 
-* 메타 정보를 같이 줄 때 : `res.send({ products, currentPage: 1, totalPages: 10 });`
-* 따로 넘겨줄 때 : `res.send({ products, pages: { currentPage: 1, totalPages: 10 }});`
+메타 정보를 같이 줄 때
+
+```
+res.send({ products, currentPage: 1, totalPages: 10 });
+```
+
+따로 넘겨줄 때
+
+```
+res.send({ products, pages: { currentPage: 1, totalPages: 10 }});
+```
