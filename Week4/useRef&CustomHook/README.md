@@ -5,20 +5,27 @@
 [공식 문서의 useRef](https://ko.reactjs.org/docs/hooks-reference.html#useref)  
 [beta 문서의 useRef](https://react.dev/reference/react/useRef)
 
-컴포넌트의 생애주기 전체에 걸쳐서 유지되는 객체  
-컴포넌트가 없어질 때까지 동일한 객체가 유지  
+컴포넌트의 생애주기 전체에 걸쳐서 유지되는 객체(컴포넌트가 없어질 때까지 동일한 객체가 유지)  
 
-객체 자체가 값은 아니고, 값을 참조하기 위한 객체  
+객체 자체가 값은 아니고, 값을 참조(reference)하기 위한 객체  
 언제든지 값을 변경할 수 있음  
+
+state와 상관 없이 어떤 값을 유지
+
+> 🕰 **컴포넌트의 생애주기**
+> 
+> 컴포넌트가 생성되고, 없어질 때(VDOM으로 들어간 요소가 사라질 때) 까지
+
+### 사용 방법
 
 ```jsx
 const refContainer = useRef(initialValue);
 ```
 
-useRef는 .current 프로퍼티로 전달된 인자(initialValue)로 초기화된 변경 가능한 ref 객체를 반환  
+useRef는 `.current` 프로퍼티로 전달된 인자(initialValue)로 초기화된 **변경 가능한 ref 객체를 반환**  
 반환된 객체는 컴포넌트의 전 생애주기를 통해 유지
 
-📦 본질적으로 useRef는 .current 프로퍼티에 변경 가능한 값을 담고 있는 상자
+📦 본질적으로 useRef는 `.current` 프로퍼티에 변경 가능한 값을 담고 있는 상자
 
 ### 주의점 
 
@@ -53,12 +60,17 @@ useRef()와 {current: ...} 객체 자체를 생성하는 것의 유일한 차이
 ### 용도
 
 1. 컴포넌트가 사라질 때까지 동일한 값을 써야 하는 경우 ⇒ input 등의 ID 관리
-2. (특히 useEffect 등과 함께 쓰면서 만나게 되는) 비동기 상황에서 현재 값을 제대로 쓰고 싶은 경우
+2. (특히 useEffect 등과 함께 쓰면서 만나게 되는) 비동기 상황에서 현재 값을 제대로 쓰고 싶은 경우 
+   * ❗️ Closure → 변수를 capture, bind를 깜빡하는 문제가 종종 발생
 
-Closure → 변수를 capture, bind를 깜빡하는 문제가 종종 발생
+#### 예시 
 
-```js
-// 절대로 쓸 일이 없는 억지로 꾸며낸 상황
+절대로 쓸 일이 없는 억지로 꾸며낸 상황
+
+> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/commit/4e69dd7b5afa28fa78f3494ad00b632209cb6493)
+
+```jsx
+// 5초 후에 현재의 입력값을 보려고 할 때 
 
 useEffect(() => {
     setTimeout(() => {
@@ -66,6 +78,24 @@ useEffect(() => {
     }, 5_000);
 }, []);
 ```
+
+* 현재값이 나오지 않음 → 시작할 때의 값이 들어갔기 때문
+
+```jsx
+  const query = useRef('');
+
+  useEffect(() => {
+    query.current = filterText;
+  }, [filterText]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(query.current);
+    }, 5_000);
+  }, []);
+```
+
+* 현재값이 제대로 출력됨
 
 ### 클로저(closure)
 
@@ -124,8 +154,12 @@ Custom Hook은 상태 관련 로직(구독을 설정하고 현재 변숫값을 �
 
 ### Custom Hook 예제
 
-```js
-function useFetchProducts() {
+> [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/commit/a5bb3ccc042f37ecee52da7d937d7ccd0f85efed)
+
+```jsx
+// useFetchProducts.ts
+
+export default function useFetchProducts() {
     const [products, setProducts] = useState<Product[]> ([]);
 
     useEffect(() => {
@@ -143,11 +177,25 @@ function useFetchProducts() {
 }
 ```
 
+```jsx
+// App.tsx
+
+export default function App() {
+    const products = useFetchProducts();
+    
+   return (
+       <FilterableProductTable products={products} />
+   );
+}
+```
+
 ### 장점 
 
 * 컴포넌트 코드가 명확해짐
-* setProducts가 실수로 잘못 쓰일 문제까지 해소
+* 재사용 편리
+* 일종의 캡슐화 ⇒ setProducts가 실수로 잘못 쓰일 문제를 해소
 * Hook을 사용하여 트리에 컴포넌트를 더하지 않음 
+* state를 이해하고 고민하지 않아도 쓸 수 있음(그냥 꺼내다 쓰면 됨)
 
 <br>
 
@@ -160,11 +208,24 @@ Hook 호출은 규칙이 있어서 단순하게 쓰도록 노력해야 함
 1. Function Component 바로 안쪽(함수의 최상위)에서만 호출
 2. Function Component 또는 Custom Hook에서만 호출
 
-⚠️ 처음에는 콜백 함수나 조건문 안에서 Hook을 호출하는 실수를 저지르기 쉬우니 주의 
+⚠️ 처음에는 콜백 함수나 조건문 안에서 Hook을 호출하는 실수를 저지르기 쉬우니 주의   
+가능하면 바깥으로 빼기
 
-```js
+```jsx
+// TimerControl.tsx
+
 if (playing) {
     const products = useFetchProducts();
     console.log(products);
 }
 ```
+
+* 오류 발생
+
+```jsx
+// custom hook을 불러오는 곳
+
+const { products, fetchProducts } = useFetchProducts();
+```
+
+* 애초에 custom hook을 만들 때 신경써야 함  
