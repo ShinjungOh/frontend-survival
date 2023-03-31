@@ -14,14 +14,16 @@ React를 쓰는 방식을 완전히 바꾼 커다란 변화 → 예전으로 돌
 
 기존 방식에 있던 몇 가지 문제를 해결
 
-* `Wrapper Hell (HoC)`  
+#### 1. Wrapper Hell (HoC)  
 컴포넌트 사이에서 상태 로직을 재사용하기 어려운 문제([render props](https://ko.reactjs.org/docs/render-props.html), [고차 컴포넌트](https://ko.reactjs.org/docs/higher-order-components.html))    
 → 💡 Hook은 계층의 변화 없이 **상태 관련 로직을 재사용**할 수 있도록 도와줌  
 컴포넌트로부터 상태 관련 로직을 추상화하고, 이를 이용해 독립적인 테스트와 재사용이 가능
-* `Huge Components` 이해하기 어려운 복잡한 컴포넌트  
+
+#### 2. Huge Components, 이해하기 어려운 복잡한 컴포넌트  
 componentDidMount, componentDidUpdate 등 상태 관련 로직, 사이드 이펙트가 있는 컴포넌트  
 → 💡 Hook을 통해 **서로 비슷한 것을 하는 작은 함수의 묶음**으로 컴포넌트를 나누는 방법 사용
-* `Confusing Classes` 사람과 기계를 혼동시키는 Class  
+
+#### 3. Confusing Classes, 사람과 기계를 혼동시키는 Class  
 React에서 Class를 사용하려면 JavaScript의 this가 어떻게 작동하는지 알아야 함    
 JavaScript의 this는 대부분의 다른 언어에서와는 다르게 작동하기 때문에 혼란 유발, 코드의 재사용성과 구성을 매우 어렵게 만듦     
 → 💡 Hook은 Class없이 React 기능들을 사용하는 방법을 제시
@@ -57,7 +59,7 @@ JavaScript의 this는 대부분의 다른 언어에서와는 다르게 작동하
 고차 컴포넌트(HOC)는 React API의 일부가 아니며, React의 구성적 특성에서 나오는 패턴
 
 컴포넌트를 다른 컴포넌트로 감싸고 props로 내려주는 기술   
-불필요한 컴포넌트가 계속 생기는 단점
+불필요한 컴포넌트가 계속 생기는 단점이 존재 
 
 ```jsx
 const EnhancedComponent = higherOrderComponent(WrappedComponent);
@@ -128,11 +130,11 @@ useEffect(didUpdate);
 > 
 > 데이터 가져오기, 구독(subscription) 설정하기, 수동으로 React 컴포넌트의 DOM을 수정하는 것 등
 > 
-> 1. 정리(clean-up)를 이용하는 Effects → 함수를 반환  
+> 1. **정리(clean-up)를 이용하는 Effects → 함수를 반환**  
 > 외부 데이터에 구독(subscription)을 설정해야 하는 경우에 메모리 누수가 발생하지 않도록 정리
 > 
 > 
-> 2. 정리(Clean-up)를 이용하지 않는 Effects → 어떤 것도 반환하지 않음  
+> 2. **정리(Clean-up)를 이용하지 않는 Effects → 어떤 것도 반환하지 않음**  
 > React가 DOM을 업데이트한 뒤 추가로 코드를 실행해야 하는 경우  
 > Ex. 네트워크 리퀘스트, DOM 수동 조작, 로깅 등은 정리(clean-up)가 필요 없는 경우
 
@@ -162,14 +164,14 @@ const value = useContext(MyContext);
 > 클래스 메소드에서도 context에 넣어 둔 함수 호출 가능  
 > 한 클래스에서 하나의 context만 사용 가능
 
-#### useContext를 호출한 컴포넌트는 context 값이 변경되면 항상 리렌더링 발생
-* 메모이제이션을 사용하여 최적화 가능
+* useContext를 호출한 컴포넌트는 context 값이 변경되면 항상 리렌더링 발생
+  * 메모이제이션을 사용하여 최적화 가능
 
-#### context의 현재 값은 Hook을 호출하는 컴포넌트에 가장 가까운 <MyContext.Provider>의 value prop에 의해 결정
-* <MyContext.Provider>가 갱신되면 Hook은 provider에게 전달된 가장 최신의 context value를 사용하여 렌더
-* 상위 컴포넌트에서 React.memo 또는 shouldComponentUpdate를 사용하더라도 useContext를 사용하고 있는 컴포넌트 자체에서부터 다시 렌더링
+* context의 현재 값은 Hook을 호출하는 컴포넌트에 가장 가까운 <MyContext.Provider>의 value prop에 의해 결정
+  * <MyContext.Provider>가 갱신되면 Hook은 provider에게 전달된 가장 최신의 context value를 사용하여 렌더
+  * 상위 컴포넌트에서 React.memo 또는 shouldComponentUpdate를 사용하더라도 useContext를 사용하고 있는 컴포넌트 자체에서부터 다시 렌더링
 
-> ⚠️ **프롭스 드릴링을 피하기 위해 사용하는 것, 전역 상태관리가 아님**  
+> ⚠️ **Context API는 프롭스 드릴링을 피하기 위해 사용하는 것, 전역 상태관리가 아님**  
 > 
 > React에서 데이터를 전달하는 기본 원칙인 단방향성 때문에 Props Drilling(프롭스 드릴링) 문제가 발생  
 > * 여러 컴포넌트에 동일한 값을 접근할 수 있도록 만들어주는 api(통로의 개념)

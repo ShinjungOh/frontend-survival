@@ -6,7 +6,28 @@
 [Fetch 사용하기](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch)
 
 웹 브라우저에서 사용하는 Web API   
-네트워크 통신을 포함한 리소스 취득을 위한 인터페이스가 정의되어 있음 
+네트워크 통신을 포함한 리소스 취득을 위한 인터페이스가 정의되어 있음
+
+### 사용 방법
+
+#### 기본적인 Fetch 요청
+
+```js
+fetch('http://example.com/movies.json')
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+```
+
+#### json() 
+
+[Response.json()](https://developer.mozilla.org/en-US/docs/Web/API/Response/json)
+
+JSON 본문 콘텐츠를 추출하기 위해서는 json() 메소드를 호출해야 함   
+json()은 응답 본문 텍스트를 JSON으로 파싱한 결과로 이행하는, 또 다른 프로미스를 반환
+
+fetch를 사용해 JSON 구문분석하기  
+API에서 데이터를 가져오는 가장 쉬운 방법    
+`.json()` 메소드를 통해 JSON 응답을 JavaScript 객체 리터럴 또는 배열로 자동으로 구문분석
 
 <br>
 
@@ -82,6 +103,11 @@ const response = fetch(url, {
 });
 ```
 
+### 텍스트 파일 한 줄씩 처리하기
+
+응답에서 읽어오는 데이터 청크(chunk)는 줄 단위로 깔끔하게 나뉘지 않으며, Uint8Array 형태(문자열 X)  
+텍스트 파일을 가져와서 줄 단위로 처리하려면, '줄' 단위로 나누는 작업은 직접 구현해야 함
+
 <br>
 
 ## 4. Unicode
@@ -108,6 +134,15 @@ const response = fetch(url, {
 > Universal Character Set, 범용 문자 집합    
 > **ISO 10646**으로 정의된 문자 인코딩의 국제 표준
 
+### Uint8Array
+
+[Uint8Array](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
+
+Uint8Array 형식화 배열(TypedArray)  
+플랫폼의 바이트 순서를 따르는 **8비트 부호 없는 정수의 배열**  
+배열의 내용은 0으로 초기화됨  
+배열이 생성되면 객체의 메소드를 사용하거나, 표준 배열 인덱스 구문(대괄호 표기법)을 사용하여 배열의 요소를 참조할 수 있음
+
 <br>
 
 ## 5. CORS
@@ -123,10 +158,11 @@ const response = fetch(url, {
 
 > 🚨 **에러 메시지**   
 > 
-> Access to fetch at 'http://localhost:3000/products' 
+> <em>Access to fetch at 'http://localhost:3000/products' 
 > from origin 'http://localhost:8080' has been blocked by CORS policy: 
 > No 'Access-Control-Allow-Origin' header is present on the requested resource. 
-> If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.  
+> If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.</em>  
+> 
 > 
 > 개발자 도구의 네트워크 탭에서 살펴보면 서버에서 response 응답은 오지만(🟢 200 OK) 동일 출처가 아니기 때문에 브라우저에서 막힘 → 오류 발생    
 
