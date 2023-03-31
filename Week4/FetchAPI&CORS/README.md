@@ -18,7 +18,7 @@ fetch('http://example.com/movies.json')
   .then((data) => console.log(data));
 ```
 
-#### json() 
+### json() 
 
 [Response.json()](https://developer.mozilla.org/en-US/docs/Web/API/Response/json)
 
