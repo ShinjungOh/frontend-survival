@@ -98,6 +98,20 @@ React에서 setInterval 등을 쓸 때는 주의해야 할 부분이 있어서 C
     - [React에서의 타이머 part 1 : setInterval 말고 이것! - 코드종님 영상](https://youtu.be/2tUdyY5uBSw)
 - [Ref 활용](https://overreacted.io/making-setinterval-declarative-with-react-hooks/#refs-to-the-rescue)
 
+```jsx
+// 기존 코드
+  useEffect(() => {
+    setTimeout(() => {
+      setReceipt(undef dined);
+    }, 5000);
+  }, [receipt]);
+
+// useInterval 적용 
+  useInterval(() => {
+    setReceipt(undefined);
+  }, receipt ? 5000 : null);
+```
+
 ### [useEventListener](https://usehooks-ts.com/react-hook/use-event-listener)
 
 모든 종류의 이벤트를 확인 가능  
@@ -122,7 +136,7 @@ export default useClickAnyWhere
 ### [useLocalStorage](https://usehooks-ts.com/react-hook/use-local-storage)
 
 localStorage와 JSON으로 객체 영속화  
-이벤트를 통해(dispatchEvent + useEventListener) 다른 컴포넌트와 동기화하는 게 매우 중요한 특징.
+이벤트를 통해(dispatchEvent + useEventListener) 다른 컴포넌트와 동기화하는 게 매우 중요한 특징
 
 ### [useDarkMode](https://usehooks-ts.com/react-hook/use-dark-mode)
 
