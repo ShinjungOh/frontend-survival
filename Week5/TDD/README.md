@@ -82,19 +82,6 @@ Mocking도 다양한 레벨에서 쉽게 사용할 수 있음
  testMatch: **/__tests__/**/*.[jt]s?(x), **/?(*.)+(spec|test).[tj]s?(x) - 0 matches
 ```
 
-### Jest 실행하기
-
-```bash
-# jest 실행
-npx jest
-
-# jest 자동 실행
-npx jest --watchAll
-# 이후 Enter 입력
-```
-
-`npx jest --watchAll`은 저장하거나 내용이 바뀔 때마다 자동으로 테스트를 진행 
-
 ### 테스트 케이스
 
 테스트 해야 하는 하나 하나의 케이스
@@ -132,6 +119,38 @@ module.exports = {
    },
 };
 ```
+
+### Jest 실행하기
+
+```bash
+# jest 실행
+npx jest
+
+# jest 자동 실행
+npx jest --watchAll
+# 이후 Enter 입력
+```
+
+`npx jest --watchAll`은 저장하거나 내용이 바뀔 때마다 자동으로 테스트를 진행
+
+> 🚨 **외부 의존성**
+> 
+> 서버를 띄우지 않고 테스트를 실행하면 
+
+### SWC
+
+[SWC 공식문서](https://swc.rs/docs/getting-started)  
+
+Rust로 만든 타입스크립트 컴파일러
+
+Jest는 타입스크립트 검증을 하지 않음 → SWC가 타입을 빼고 테스트를 돌리기 때문  
+**타입을 잡고 싶다면** 다음 명령어를 실행하면 됨 
+
+```
+npx tsc --noEmit
+```
+
+컴파일을 진행한 결과가 js 파일로 생기는데, 이것을 생기지 않도록 하는 명령  
 
 <br>
 
@@ -222,14 +241,23 @@ describe('add', () => {
 
 ## 4. Describe - Context - It 패턴
 
+상황마다 다른 맥락을 묘사하는 것  
+코드의 행동을 설명하는 패턴이기 때문에 이해하기 쉬움  
+
 RSpec의 describe-it에서 따온 패턴    
-when 또는 with 사용  
-context를 지원하지 않음  
+`when` 또는 `with` 사용  
+context를 지원하지 않음
 
 ```js
 // 해결 방법
 const context = describe;
 ```
+
+### 장점
+
+* 쓰기 편하고 코드의 의도가 명확해짐
+* 다양한 상황을 고려할 수 있음 → 테스트 커버리지의 증대
+* 전역변수를 남발하는 문제 해결 
 
 
 ### 중복 제거 예시 
