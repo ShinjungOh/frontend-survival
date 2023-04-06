@@ -2,9 +2,21 @@
 
 ## 1. Service Worker
 
-[Service Worker API](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)
+[Service Worker API](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)  
+[Workers overview](https://web.dev/workers-overview/)
 
-<figure><img src="https://github.com/ShinjungOh/TIL/blob/main/Images/webworker2.png" alt="service_worker" width="100%"></figure>
+서비스 워커는 웹 응용 프로그램, 브라우저, 그리고 (사용 가능한 경우) 네트워크 사이의 프록시 서버 역할을 함  
+
+<figure><img src="https://github.com/ShinjungOh/TIL/blob/main/Images/webworker2.png?raw=true" alt="service_worker" width="100%"></figure>
+
+### 특징 
+
+* 효과적인 오프라인 경험을 생성
+* 네트워크 요청을 가로채서 네트워크 사용 가능 여부에 따라 적절한 행동을 취함
+* 서버의 자산을 업데이트
+* 푸시 알림과 백그라운드 동기화 API로의 접근도 제공
+* 보안 상의 이유로 HTTPS에서만 동작
+  * 네트워크 요청을 수정할 수 있다는 점에서 중간자 공격에 굉장히 취약하기 때문
 
 ### 웹 워커 vs 서비스 워커
 
@@ -12,14 +24,12 @@
 
 * [Web API](https://developer.mozilla.org/ko/docs/Web/API) 중 하나
 * 웹 사이트에서 사용할 수 있는 워커
-* 둘 다 보조 스레드에서 실행되므로 기본 스레드와 사용자 인터페이스를 차단하지 않고 JavaScript 코드를 실행
-* Window 및 Document objects에 대한 액세스 권한이 없으므로, DOM과 직접 상호 작용할 수 없으며 브라우저 API에 대한 액세스가 제한됨
-
-<br>
+* 둘 다 보조 스레드에서 실행되므로 기본 스레드와 사용자 인터페이스를 차단하지 않고 JavaScript 코드를 실행(**논 블로킹**)
+* Window 및 Document objects에 대한 액세스 권한이 없으므로, DOM과 직접 상호 작용할 수 없으며(**DOM에 접근 불가**) 브라우저 API에 대한 액세스가 제한됨
 
 #### 차이점
 
-|         |        웹 워커         |                         서비스 워커                         |
+|   차이점   |        웹 워커         |                         서비스 워커                         |
 |:-------:|:-------------------:|:------------------------------------------------------:|
 |   수명    | 웹 워커가 속한 탭과 밀접하게 연결 |                          독립적                           |
 | 탭 종료 시  |         종료됨         |                    백그라운드에서 계속 실행 가능                    |
@@ -29,7 +39,7 @@
 * 웹 워커의 수명은 웹 워커가 속한 탭과 밀접하게 연결되어 있는 반면, 서비스 워커의 수명 주기는 독립적  
   웹 워커가 실행 중인 탭을 닫으면 종료되지만, 서비스 워커는 사이트에 열려 있는 활성 탭이 없는 경우에도 백그라운드에서 계속 실행 가능
 * 페이지는 여러 웹 워커를 생성할 수 있지만, 단일 서비스 워커는 등록된 범위의 모든 활성 탭을 제어
-* 웹 워커와 달리 서비스 워커를 사용하면 fetch이벤트를 통해 네트워크 요청을 가로채고,  
+* 웹 워커와 달리 서비스 워커를 사용하면 **fetch이벤트**를 통해 네트워크 요청을 가로채고,  
   백그라운드에서 push이벤트를 통해 Push API 이벤트를 수신
 
 <br>
@@ -46,12 +56,12 @@ Node, 브라우저 둘 다 지원
 
 > 🥊 **Express vs MSW**
 >
-> MSW는 jest의 테스트 환경(Node.js 기반) 외에 웹 브라우저도 지원  
-> API 스펙은 나왔지만 아직 구현되지 않은 경우 임시로 사용할 수 있음
-> 
 > 단순히 임시 서버를 만들 거라면 Express를 쓰는 게 더 낫지만,
 > MSW는 테스트 코드도 지원하면서 겸사겸사 웹 브라우저를 지원하는 용도로는 나쁘지 않은 선택
-
+>
+> MSW는 jest의 테스트 환경(Node.js 기반) 외에 웹 브라우저도 지원  
+> API 스펙은 나왔지만 아직 구현되지 않은 경우 임시로 사용할 수 있음
+ 
 ### 사용 방법
 
 [Integrate mocking into Node](https://mswjs.io/docs/getting-started/integrate/node)
@@ -164,7 +174,7 @@ module.exports = {
 ### handlers.ts 파일 작성
 
 `진짜같은 것`이지 `진짜`가 아님  
-진짜도 테스트가 필요함 ⇒ E2E 테스트 
+진짜도 테스트가 필요함 ⇒ **E2E 테스트** 
 
 ```ts
 // src/mocks/handlers.ts 
@@ -251,13 +261,13 @@ Node 최신 버전은 fetch를 지원하지만, 현재 사용 중인 Node 버전
 npm i -D whatwg-fetch
 ```
 
-#### setupTests.ts 파일에 import
+#### `setupTests.ts` 파일에 import
 
 ```
 import 'whatwg-fetch'
 ```
 
-#### hooks/useFetchProducts.ts 원상태로 되돌리기
+#### `hooks/useFetchProducts.ts` 파일 원상태로 되돌리기
 
 ```ts
 export default function useFetchProducts() {
@@ -275,8 +285,8 @@ export default function useFetchProducts() {
 
 ## 3. polyfill(폴리필)
 
-[Polyfill](https://developer.mozilla.org/ko/docs/Glossary/Polyfill)
-[모던 자바스크립트 - 폴리필](https://ko.javascript.info/polyfills)
+[MDN - Polyfill](https://developer.mozilla.org/ko/docs/Glossary/Polyfill)  
+[모던 자바스크립트 - 폴리필](https://ko.javascript.info/polyfills)  
 [GitHub에서 만든 fetch polyfill](https://github.com/github/fetch)  
 
 기본적으로 지원하지 않는 이전 브라우저에서 **최신 기능**을 제공하는 데 필요한 코드 (일반적으로 웹의 JavaScript)
@@ -284,4 +294,4 @@ export default function useFetchProducts() {
 자바스크립트 엔진을 만드는 각 조직은 나름대로 우선순위를 매겨 명세서 내 어떤 기능을 먼저 구현할지 결정  
 명세서에 등록된 기능보다 초안(draft)에 있는 제안을 먼저 구현하기로 결정하는 경우도 존재  
 구현 난도가 높아서 이런 결정을 내리는 경우도 있지만, 구미를 당기지 않아 이런 결정을 내리기도 함  
-엔진이 **표준 전체를 지원하지 않고 일부만 지원**하는 건 흔한 일
+엔진이 **표준 전체를 지원하지 않고 일부만 지원**하는 것은 흔한 일
