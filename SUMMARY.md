@@ -30,3 +30,9 @@
   * [3. MSW](Week5/MSW/README.md)
   * [4. Playwright](Week5/Playwright/README.md)
   * [한 주를 마치며](Week5/회고/README.md)
+* [6주차](Week6/README.md)
+  * [1. External Store](Week6/ExternalStore/README.md)
+  * [2. TSyringe](Week6/TSyringe/README.md)
+  * [3. Redux 따라하기](Week6/Redux/README.md)
+  * [4. usestore-ts](Week6/usestore-ts/README.md)
+

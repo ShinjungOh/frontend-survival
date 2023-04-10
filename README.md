@@ -32,3 +32,8 @@
   * React Testing Library
   * MSW
   * Playwright
+* `6주차`
+  * External Store
+  * TSyringe
+  * Redux 따라하기
+  * Playwright
