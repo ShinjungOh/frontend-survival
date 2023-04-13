@@ -43,7 +43,7 @@ props를 애플리케이션 안의 여러 컴포넌트에 전해줘야하는 경
 
 > [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/commit/fbab3a930b92ddbf760b39a7c7bc1127d9ee4b90)
 
-#### 의존성 설치
+#### 1. 의존성 설치
 
 ```
 npm i tsyringe reflect-metadata
@@ -57,7 +57,7 @@ npm i tsyringe reflect-metadata
 > * [core-js (core-js/es7/reflect)](https://www.npmjs.com/package/core-js) 
 > * [reflection](https://www.npmjs.com/package/@abraham/reflection)
 
-#### reflect-metadata import
+#### 2. reflect-metadata import
 
 `src/main.tsx` 파일과 `src/setupTests.ts` 파일에서 reflect-metadata를 import
 * 모든 것이 시작하는 곳에 import 
@@ -70,7 +70,16 @@ import 'reflect-metadata';
 > 
 > 🚨 <em>Error: tsyringe requires a reflect polyfill. Please add 'import "reflect-metadata"' to the top of your entry point.</em>
 
-#### `tsconfig.json` 파일에 decorator 설정 주석 해제
+> `jest.config.js`에 설정 추가
+> 
+> ```js
+> setupFilesAfterEnv: [
+>   '@testing-library/jest-dom/extend-expect', 
+>   '<rootDir>/src/setupTests.ts',	
+> ]
+> ```
+
+#### 3. `tsconfig.json` 파일에 decorator 설정 주석 해제
 
 ```
 "experimentalDecorators": true,    
@@ -79,7 +88,7 @@ import 'reflect-metadata';
 
 decorator : @사용하기
 
-#### Store 클래스 생성 
+#### 4. Store 클래스 생성 
 
 싱글톤으로 관리할 CounterStore 클래스를 준비
 
@@ -92,7 +101,7 @@ export default class CounterStore {
 }
 ```
 
-#### 싱글톤 Store 객체 사용
+#### 5. 싱글톤 Store 객체 사용
 
 싱글톤 CounterStore 객체를 사용
 
@@ -106,7 +115,7 @@ const counterStore = container.resolve(CounterStore);
 * IoC Container가 객체 생성을 알아서 해줌
 * 알아서 조립해주는 factory 기능 탑재  
 
-#### 테스트에서 초기화하기
+#### 6. 테스트에서 초기화하기
 
 테스트에서 TSyringe에서 관리하는 객체를 초기화할 수 있음  
 
@@ -115,6 +124,11 @@ beforeEach(() => {
     container.clearInstances();
 });
 ```
+
+### 상태 변경 알림
+
+Store는 어떤 식으로든 action을 처리하고, 상태가 바뀌면 연결된 컴포넌트를 forceUpdate  
+컴포넌트는 해당 Store에서 상태를 얻어서 UI를 업데이트하게 되는데, 선언형 UI가 얼마나 편한지 절실히 느낄 수 있는 포인트
 
 <br>
 
