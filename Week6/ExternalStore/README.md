@@ -38,7 +38,7 @@ function reducer(state) {
 export default function useForceUpdate() {
     const [, setState] = useState({});
 
-    // UseState와 forceUpdate 함수로 useReducer와 동일 효과
+    // useState와 forceUpdate 함수로 useReducer와 동일 효과
     const forceUpdate = () => {
         setState({}); // 새로운 객체 생성
     };
@@ -129,7 +129,7 @@ Layered Architecture에서는 **사용자에게 가까운 것(UI), 사용자와 
 
 * 사람이 **스위치**를 조종하면(UI)
 * **모터**가 움직여서(비즈니스 로직을 이용)
-* **바퀴를** 굴릴 수 있음(DB에 접근하고 처리할 수 있음)
+* **바퀴**를 굴릴 수 있음(DB에 접근하고 처리할 수 있음)
 
 ### 관심사를 분리하는 기준 - 프로세스
 
@@ -193,7 +193,7 @@ Facebook(현 Meta)에서 MVC 패턴의 한계에 대안으로 내세운 아키�
 
 ### Action, Dispatcher, Store
 
-<figuare><img src="https://haruair.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png" alt="flux 패턴의 구조와 데이터 흐름"></figuare>
+<figure><img src="https://haruair.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png" alt="flux 패턴의 구조와 데이터 흐름" width="100%"></figure>
 
 1. Action → 이벤트/메시지 같은 객체, ([dispatchEvent](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent)
    와 비슷한 행동)
@@ -216,7 +216,7 @@ Facebook(현 Meta)에서 MVC 패턴의 한계에 대안으로 내세운 아키�
 
 Redux는 **단일 스토어**를 사용함으로써 좀 더 단순한 그림을 제안
 
-<figuare><img src="https://ko.redux.js.org/assets/images/one-way-data-flow-04fe46332c1ccb3497ecb04b94e55b97.png" alt="Redux 데이터 흐름"></figuare>
+<figure><img src="https://ko.redux.js.org/assets/images/one-way-data-flow-04fe46332c1ccb3497ecb04b94e55b97.png" alt="Redux 데이터 흐름" width="100%"></figure>
 
 1. Action → State를 변화시킴
     * switch를 통해 action의 type을 판단, 각각의 행위를 결정
