@@ -124,15 +124,15 @@ subscribe 함수 안에 리스너 함수를 파라미터로 넣어서 호출하�
 ## 4. Redux 따라하기 
 
 > [🔗 실습 링크 : BaseStore, Store 생성 및 useDispatch 분리](https://github.com/ShinjungOh/2023-learn-react/commit/0fa7f63f6768e0a865451f727ca45000a79e1183)  
-> [🔗 실습 링크 : useSelector 함수 분리](https://github.com/ShinjungOh/2023-learn-react/commit/25df636ce1810383ee60a7671ec70cb3d42f25a2)
-
+> [🔗 실습 링크 : useSelector 함수 분리](https://github.com/ShinjungOh/2023-learn-react/commit/25df636ce1810383ee60a7671ec70cb3d42f25a2)  
+> [🔗 실습 링크 : useSelector 로직 변경 및 useStore 파일 삭제, 타입 보완](https://github.com/ShinjungOh/2023-learn-react/commit/7ae70e4362a25873cba06dd6b34609702d6c2c85)
 
 ### useDispatch
 
 [useDispatch](https://ko.redux.js.org/tutorials/fundamentals/part-5-ui-react/#dispatching-actions-with-usedispatch)
 
 컴포넌트 내부에서 스토어의 내장 함수인 dispatch를 사용할 수 있도록 함  
-컨테이너 컴포넌트에서 액션을 넘겨줄 떄(디스패치 할 때) 사용
+컨테이너 컴포넌트에서 액션을 넘겨줄 때(디스패치 할 때) 사용
 
 ```js
 const dispatch = useDispatch(); 
@@ -161,14 +161,13 @@ const count = useSelector(state => state.count);
 const number = useSelector(state => state.counter.number);
 ```
 
-
 <br>
 
 ## 5. Reflect
 
 [Reflect](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Reflect)  
 
-중간에서 가로챌 수 있는 JavaScript 작업에 대한 메서드를 제공하는 내장 객체  
+중간에서 가로챌 수 있는 JavaScript 작업에 대한 메소드를 제공하는 내장 객체  
 Reflect는 함수 객체가 아니므로 생성자로 사용할 수 없음 
 
 #### 사용 예시 
