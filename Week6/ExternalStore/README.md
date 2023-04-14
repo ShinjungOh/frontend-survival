@@ -251,11 +251,16 @@ setState가 내부적으로 useReducer를 사용
 const [state, dispatch] = useReducer(reducer, initialArg, init);
 ```
 
+`(state, action) => newState`의 형태로 reducer를 받고 dispatch 메소드와 짝의 형태로 현재 state를 반환
+
 <br>
 
 ## 6. useCallback
 
 [useCallback](https://ko.reactjs.org/docs/hooks-reference.html#usecallback)
+
+useMemo를 조금 더 편리하게 사용할 수 있도록 만든 버전  
+함수를 memoization 할 수 있도록 해주는 함수이며, 의존성 배열의 동작은 동일
 
 ### 사용 방법
 
@@ -267,3 +272,25 @@ const memoizedCallback = useCallback(() => {
 
 useCallback은 콜백함수의 메모이제이션된 값을 반환  
 메모이제이션된 값은 콜백의 의존성이 변경되었을 때에만 변경(useEffect의 의존성 배열과 같음)
+
+### Memoization
+
+특정한 값을 저장해뒀다가, 이후에 해당 값이 필요할 때 새롭게 계산해서 사용하는게 아니라 **저장해둔 값을 활용**하는 테크닉  
+리액트에서는 함수 컴포넌트에서 값을 memoization 할 수 있도록 useMemo, useCallback 등의 API(메소드)를 제공함
+
+> 🔎 **메모이제이션은 항상 좋을까?**
+> 
+> 저장해두고 필요할 때 꺼내서 쓴다 ⇒ 효율적일 것 같다고 생각되지만, ⚠️ 무조건 쓰는게 좋은 것은 아님    
+> **새로운 값을 만드는 것**과 어딘가에 **이전의 값을 저장해두고 메모이제이션 함수를 호출하고, 
+> 의존성을 비교해서 가져올지 말지 여부를 판단하는 것** 중 어떤 것이 비용이 더 적게 들까?  
+> 💡 새로운 값을 만드는 과정이 복잡하지 않다면, 메모이제이션을 사용하는 것은 오히려 비용이 더 많이 들 수도 있음! 
+
+
+### 어떤 상황에서 사용할까?
+
+* 새로운 값을 만드는 연산이 복잡할 때 
+* 함수 컴포넌트의 이전 호출과, 다음 호출 간 사용하는 값의 동일성을 보장하고 싶을 때 
+  * 함수 컴포넌트의 호출 간 값들의 동일성을 보장하기 위해서
+  * 동일성을 보장해야 하는 이유는 React.memo 와 연동해서 사용하기 위해
+
+useNavigate, useState등도 내부적으로 메모이제이션 되어있음 
