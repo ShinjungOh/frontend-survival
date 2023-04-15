@@ -97,11 +97,15 @@ export default function useCounterStore() {
 }
 ```
 
+<br>
+
 ## 2. usesotre-ts
 
 [usestore-ts](https://usestore-ts.com/)
 
 > [🔗 실습 링크](https://github.com/ShinjungOh/2023-learn-react/commit/61b0546c148f9c6e49df2e3548901f6c8bc96c83)
+
+<em>React state management library</em>
 
 > 💡 내부적으로 어떻게 동작하는지 이해하고 사용할 것  
 > 타입스크립트를 잘 모른다면 어려울 수 있음   
@@ -225,7 +229,7 @@ class PostStore {
 [Immer](https://immerjs.github.io/immer/)
 
 불변성을 유지해주는 코드를 편리한 방식으로 작업할 수 있게 해주는 라이브러리  
-오브젝트 전체를 복사해서 주고, 그것을 이용할 수 있도록 되어 있음
+오브젝트 전체를 복사해서 주고, 그것을 이용할 수 있도록 되어 있음  
 [Redux Toolkit](https://redux-toolkit.js.org/) 에도 기본으로 적용
 
 ```js

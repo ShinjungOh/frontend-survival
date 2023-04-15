@@ -36,4 +36,4 @@
   * External Store
   * TSyringe
   * Redux 따라하기
-  * Playwright
+  * usesotre-ts

@@ -35,4 +35,4 @@
   * [2. TSyringe](Week6/TSyringe/README.md)
   * [3. Redux 따라하기](Week6/Redux/README.md)
   * [4. usestore-ts](Week6/usestore-ts/README.md)
-
+  * [한 주를 마치며](Week6/회고/README.md)
