@@ -61,6 +61,9 @@ const handleClick = event => {
 
 ## 2. React Router
 
+> [🔗 실습 링크 : Navigate 적용, 테스트 코드 작성 및 whatwg-fetch 설치](https://github.com/ShinjungOh/2023-learn-react/commit/c5982555dffd2792bf86ed5ee8a0d684b7c98364)  
+> [🔗 실습 링크 : useNavigate 이용해 리다이렉션 처리하기](https://github.com/ShinjungOh/2023-learn-react/commit/1bc5461e5805584bc6c7547fd5a9538429decded)
+
 ### Link
 
 [Link](https://reactrouter.com/en/main/components/link)
@@ -161,7 +164,7 @@ export default function LogoutPage() {
 
 💡 테스트에서 `ReferenceError: Request is not defined` 에러가 나면 **whatwg-fetch**를 임포트해서 해결
 
-> 🚨 **오류 메시지**
+> 🚨 **에러 메시지**
 >   
 > ▶️ `RUNS`  src/routes.test.tsx  
 > return new Request(url, init);  
