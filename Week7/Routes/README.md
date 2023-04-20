@@ -116,7 +116,7 @@ Route가 URL과 일치할 때 렌더링할 React 요소/구성 요소
 
 > 🚨 **Browser Router를 사용하지 않았을 때 에러 메시지**
 >
-> <em>Uncaught Error: useRoutes() may be used only in the context of a <Router> component.</em>
+> <em>Uncaught Error: useRoutes() may be used only in the context of a `<Router>` component.</em>
 
 #### 사용 방법
 
