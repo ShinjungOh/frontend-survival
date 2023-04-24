@@ -42,3 +42,10 @@
   * Routes
   * Router
   * Navigation
+* `8주차`
+  * Design System
+  * Style Basics
+  * CSS in JS
+  * styled-components
+  * props와 attrs
+  * Global Style & Theme
