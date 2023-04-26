@@ -3,7 +3,7 @@
 ## 1. CSS
 
 Cascading Style Sheets   
-HTML이나 XML(SVG, XHTML 포함)로 작성된 문서의 표시 방법을 기술하기 위한 스타일 시트 언어  
+HTML이나 XML([SVG](https://ko.wikipedia.org/wiki/%EC%8A%A4%EC%BC%80%EC%9D%BC%EB%9F%AC%EB%B8%94_%EB%B2%A1%ED%84%B0_%EA%B7%B8%EB%9E%98%ED%94%BD%EC%8A%A4), [XHTML](https://ko.wikipedia.org/wiki/XHTML) 포함)로 작성된 문서의 표시 방법을 기술하기 위한 스타일 시트 언어  
 웹 페이지에 스타일과 레이아웃을 적용할 때 사용
 
 <figure><img src="https://github.com/ShinjungOh/TIL/blob/main/Images/css-declaration.png?raw=true" alt="css-declaration" width="100%"></figure>
@@ -69,7 +69,7 @@ const BlueText = styled.p`
 
 #### [Most popular CSS-in-JS libraries](https://npmtrends.com/aphrodite-vs-emotion-vs-glamorous-vs-jss-vs-radium-vs-styled-components-vs-styletron)
 
-2023년 1월 기준으로 styled-components > JSS > Emotion 순서
+2023년 4월 기준으로 styled-components > JSS > Emotion 순서
 
 ### 성능 이슈
 
