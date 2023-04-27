@@ -39,7 +39,7 @@ Rust로 만든 타입스크립트 컴파일러
 
 ### 해두면 좋은 세팅 
 
-1. `package.json` 파일에 source 속성 추가
+#### 1. `package.json` 파일에 source 속성 추가
 
 ```
 "source": "./index.html",
@@ -49,7 +49,7 @@ Rust로 만든 타입스크립트 컴파일러
 매번 치기 번거롭기 때문에 `"source": "./index.html",` 설정을 추가  
 ⇒ `npx parcel --port 8080`만 입력해도 됨  
 
-2. [parcel-reporter-static-files-copy](https://github.com/elwin013/parcel-reporter-static-files-copy) 패키지 설치 후 `.parcelrc` 파일 작성     
+#### 2. [parcel-reporter-static-files-copy](https://github.com/elwin013/parcel-reporter-static-files-copy) 패키지 설치 후 `.parcelrc` 파일 작성     
 
 static 폴더의 파일을 정적 파일로 Serving 가능(이미지 등 Assets)   
 
