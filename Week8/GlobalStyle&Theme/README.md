@@ -167,10 +167,11 @@ export default function App() {
 [Create a declarations file](https://styled-components.com/docs/api#create-a-declarations-file)
 
 디자인 시스템의 근간을 마련하는데 활용  
-잘 정의하면 **다크 모드** 등에 대응하기 쉬움  
+잘 정의하면 **다크 모드** 등에 대응하기 쉬움
+
 눈에 보이는 단편적인 정보를 넘어서, **의미**에 집중할 수 있게 됨    
-Ex. 흰색이 아니라, Primary Color  
-Ex. 파란색이 아니라, 테두리색 
+* Ex. 흰색이 아니라, Primary Color
+* Ex. 파란색이 아니라, 테두리색 
 
 ### 📌 노하우와 팁   
 

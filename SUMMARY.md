@@ -49,3 +49,4 @@
   * [4. styled-components](Week8/styled-components/README.md)
   * [5. props와 attrs](Week8/props&attrs/README.md)
   * [6. Global Style & Theme](Week8/GlobalStyle&Theme/README.md)
+  * [한 주를 마치며](Week8/회고/README.md)
