@@ -49,3 +49,9 @@
   * styled-components
   * props와 attrs
   * Global Style & Theme
+* `9주차`
+  * 개발하기 전 준비
+  * 목록 보기
+  * 상품 상세 보기
+  * 장바구니 보기
+  * 장바구니에 상품 담기
