@@ -206,7 +206,26 @@ Playwright을 기본으로 쓸 수 있음
 
 ### 사용 방법 
 
-시나리오를 여러개 작성할 수 있음 
+#### 패키지 설치 
+
+```
+npx create-codeceptjs .
+```
+
+* package.json 파일의 들여쓰기가 변경됨에 주의 
+
+
+#### 프로젝트 세팅
+
+```
+npx codeceptjs init
+```
+
+![](../../images/week5_4_codecept_install.png)
+
+#### 시나리오 작성 
+
+시나리오를 여러 개 작성할 수 있음 
 
 ```js
 Feature('My First Test');
@@ -215,4 +234,17 @@ Scenario('test something', ({ I }) => {
   I.amOnPage('https://github.com');
   I.see('GitHub');
 });
+```
+
+#### 실행하기 
+
+```bash
+# 웹 브라우저를 화면에 띄워 테스트를 실행
+npm run codeceptjs
+
+# 웹 브라우저를 화면에 띄우지 않고 테스트를 실행
+npm run codeceptjs:headless
+
+# 웹 브라우저에 CodeceptUI를 띄워 훨씬 편학게 테스트를 실행
+npm run codeceptjs:ui
 ```
