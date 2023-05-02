@@ -4,9 +4,9 @@
 
 > [🔗 실습 링크 : useFetchProducts hook 구현](https://github.com/ShinjungOh/2023-learn-react/commit/cb5eebec28342d8d38bb61d0a020e7b11fc7638d)  
 > [🔗 실습 링크 : Products UI 구현](https://github.com/ShinjungOh/2023-learn-react/commit/b2b5b9a697d61eb1c2e3e486036fb47763244470)  
-> [🔗 실습 링크 : ]()
+> [🔗 실습 링크 : ProductsStore 적용](https://github.com/ShinjungOh/2023-learn-react/commit/96ec76f853f709ee63b7c68254c3e3d1f6f8130b)
 
-**상품 목록을 얻어서** 표시하는 **화면을 만들기**
+🎯 **상품 목록을 얻어서** 표시하는 **화면을 만들기**
 
 1. 상품 목록 얻기 - API 서버에서 
 2. 상품 목록 보여주기 - React로 
@@ -16,6 +16,8 @@
 
 * 단일 책임 원칙 
 * 테스트 용이
+
+![](../../images/week9_2_products.png)
 
 ### ProductListPage 구현 
 
@@ -43,7 +45,7 @@ export default function ProductListPage() {
 ### useFetchProducts hook 생성 
 
 ```tsx
-// useFetchProducts.ts
+// hooks/useFetchProducts.ts
 
 const apiBaseUrl = 'https://shop-demo-api-01.fly.dev';
 
@@ -165,7 +167,13 @@ export default function useFetchProducts(): {
 
 ## 2. 카테고리 목록
 
-헤더에 카테고리 목록을 보여주자.
+> [🔗 실습 링크 : useFetchCategories hook 및 CategoriesStore 구현, ApiService 분리](https://github.com/ShinjungOh/2023-learn-react/commit/cd2ad6831dd5d318fd6f59cbbfb2baa48827d235)
+
+🎯 헤더에서 **카테고리 목록**을 표시하기 
+
+![](../../images/week9_2_categories.png)
+
+### Header에 카테고리 목록 보여주기 
 
 ```tsx
 export default function Header() {
@@ -203,9 +211,16 @@ export default function Header() {
 }
 ```
 
-바로 Store를 준비한다.
+### useFetchCategories hook 생성
+
+`hooks/useFetchCategories.ts`  
+useFetchProducts 복사해서 수정하면 편리  
+
+### Store 구현 
 
 ```tsx
+// stores/CategoriesStore.ts
+
 @singleton()
 @Store()
 export default class CategoriesStore {
@@ -226,11 +241,13 @@ export default class CategoriesStore {
 }
 ```
 
-API 호출을 모아주는 ApiService를 만든다. API의 base URL을 지정하기 위해 환경변수를 활용한다.
+### ApiService 파일 분리 
+
+services 폴더에 API 호출을 모아주는 ApiService 파일을 생성   
+API의 **base URL**을 지정하기 위해 환경변수를 활용
 
 ```tsx
-const API_BASE_URL = process.env.API_BASE_URL
-                     || 'https://shop-demo-api-01.fly.dev';
+const API_BASE_URL = process.env.API_BASE_URL || 'https://...';
 
 export default class ApiService {
   private instance = axios.create({
@@ -253,25 +270,33 @@ export default class ApiService {
 export const apiService = new ApiService();
 ```
 
-마지막으로, useFetchCategories 훅을 만든다.
+* ProductsStore 에서도 코드 수정
 
-```tsx
-export default function useFetchCategories() {
-  const store = container.resolve(CategoriesStore);
+<br>
 
-  const [{ categories }] = useStore(store);
+## 3. 카테고리별 상품 목록
 
-  useEffectOnce(() => {
-    store.fetchCategories();
-  });
+> [🔗 실습 링크 : 카테고리별 상품 목록 보기 구현](https://github.com/ShinjungOh/2023-learn-react/commit/cc2920e75f0d92453743d984dc7a1aea5b4eff9e)
 
-  return { categories };
-}
+🎯 카테고리 클릭 시 **해당 카테고리 상품** 보여주기 
+
+처음부터 고민해서 바로 만들어도 되고, 일단 만들고 고쳐나가도 됨  
+
+![](../../images/week9_2_category.png)
+
+### useSearchParams
+
+[React Router - useSearchParams](https://reactrouter.com/en/main/hooks/use-search-params)
+
+현재 위치에 대한 URL의 쿼리 문자열을 읽고 수정하는 데 사용  
+React의 useState와 비슷하게, 현재 위치의 **검색 매개변수**와 이를 **업데이트하는 데 사용하는 함수**의 배열을 반환
+
+```
+// 참고 
+window.location.search
 ```
 
-## 카테고리별 상품 목록
-
-ProductListPage 컴포넌트에서 categoryId를 얻는다.
+### ProductListPage에서 categoryId 얻어오기 
 
 ```tsx
 export default function ProductListPage() {
@@ -290,7 +315,9 @@ export default function ProductListPage() {
 }
 ```
 
-카테고리 ID를 쓰도록 훅을 변경.
+* Id가 없으면 null을 반환하는데, 여기서는 일부러 undefined 사용(있을 수도, 없을 수도 있음) 
+
+### 카테고리 ID를 쓰도록 hook 변경
 
 ```tsx
 export default function useFetchProducts({ categoryId }: {
@@ -310,7 +337,10 @@ export default function useFetchProducts({ categoryId }: {
 }
 ```
 
-Store도 변경.
+* 카테고리 ID가 바뀔 때마다 리렌더되야 하므로 `useEffect`를 사용 
+* useFetchCategories 도 `useEffect`를 사용하고 의존성 배열에 store 추가 
+
+### Store 변경
 
 ```tsx
 async fetchProducts({ categoryId }: {
@@ -324,18 +354,20 @@ async fetchProducts({ categoryId }: {
 }
 ```
 
-API Service도 변경.
+### API Service 변경
 
 ```tsx
-async fetchProducts({ categoryId }: {
-  categoryId?: string;
-} = {}): Promise<ProductSummary[]> {
-  const { data } = await this.instance.get('/products', {
-    params: { categoryId },
-  });
-  const { products } = data;
-  return products;
+export default class ApiService {
+    async fetchProducts({categoryId}: { 
+        categoryId?: string; 
+    } = {}): Promise<ProductSummary[]> {
+        const {data} = await this.instance.get('/products', {
+            params: {categoryId},
+        });
+        const {products} = data;
+        return products;
+    }
 }
 ```
 
-사실 강의를 준비할 때는 처음부터 이렇게 만들기는 했다. 처음부터 고민해서 바로 만들어도 되고, 일단 만들고 이렇게 고쳐나가도 된다. 테스트 코드가 있으면 이런 변경 작업을 할 때 더 자신감을 얻을 수 있다.
+* axios는 params를 넘겨줄 수 있음

@@ -101,7 +101,7 @@ CodeceptJS로 E2E 테스트 준비하고, 여기 있는 기능 테스트를 모�
 
 ## 6. Styles
 
-> [🔗 참고 자료](https://shinjungohs-dev-road.gitbook.io/megaptera-frontend/undefined/week8/globalstyle-and-theme)
+> [📌 참고 자료](https://shinjungohs-dev-road.gitbook.io/megaptera-frontend/undefined/week8/globalstyle-and-theme)
 
 styles-components를 사용하기 위해 **defaultTheme**과 **GlobalStyles**를 준비  
 기본 코드는 기존과 크게 다르지 않음
@@ -110,7 +110,7 @@ styles-components를 사용하기 위해 **defaultTheme**과 **GlobalStyles**를
 
 ## 7. Routes
 
-> [🔗 참고 자료](https://shinjungohs-dev-road.gitbook.io/megaptera-frontend/undefined/week7/router)
+> [📌 참고 자료](https://shinjungohs-dev-road.gitbook.io/megaptera-frontend/undefined/week7/router)
 
 React Router로 여러 페이지를 표현하기 위해 **routes**와 **Layout**을 준비  
 기본 코드는 기존과 크게 다르지 않음
@@ -229,7 +229,7 @@ export type Cart = {
 
 ## 10. MSW 세팅
 
-> [🔗 참고 자료](https://shinjungohs-dev-road.gitbook.io/megaptera-frontend/undefined/week5/msw)
+> [📌 참고 자료](https://shinjungohs-dev-road.gitbook.io/megaptera-frontend/undefined/week5/msw)
 
 REST API 스펙에 맞춰서 MSW 핸들러를 준비
 
