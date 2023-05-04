@@ -245,6 +245,6 @@ npm run codeceptjs
 # 웹 브라우저를 화면에 띄우지 않고 테스트를 실행
 npm run codeceptjs:headless
 
-# 웹 브라우저에 CodeceptUI를 띄워 훨씬 편학게 테스트를 실행
+# 웹 브라우저에 CodeceptUI를 띄워 훨씬 편하게 테스트를 실행
 npm run codeceptjs:ui
 ```
