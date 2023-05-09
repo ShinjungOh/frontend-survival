@@ -276,11 +276,13 @@ export const apiService = new ApiService();
 
 ## 3. 카테고리별 상품 목록
 
-> [🔗 실습 링크 : 카테고리별 상품 목록 보기 구현](https://github.com/ShinjungOh/2023-learn-react/commit/cc2920e75f0d92453743d984dc7a1aea5b4eff9e)
+> [🔗 실습 링크 : 카테고리별 상품 목록 보기 구현](https://github.com/ShinjungOh/2023-learn-react/commit/cc2920e75f0d92453743d984dc7a1aea5b4eff9e)  
+> [🔗 실습 링크 : codecept 설치 및 routes, product list 테스트](https://github.com/ShinjungOh/2023-learn-react/commit/edc98492b40d496028b0f665c3bfefe5e6741731)
 
 🎯 카테고리 클릭 시 **해당 카테고리 상품** 보여주기 
 
 처음부터 고민해서 바로 만들어도 되고, 일단 만들고 고쳐나가도 됨  
+테스트 코드를 작성하면서 하면 오류를 줄일 수 있음 
 
 ![](../../images/week9_2_category.png)
 
