@@ -56,3 +56,4 @@
   * [3. 상품 상세 보기](Week9/detail/README.md)
   * [4. 장바구니 보기](Week9/cart/README.md)
   * [5. 장바구니에 상품 담기](Week9/AddToCart/README.md)
+  * [한 주를 마치며](Week9/회고/README.md)
