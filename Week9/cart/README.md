@@ -4,7 +4,9 @@
 
 > [🔗 실습 링크 : 장바구니 보기 CartStore, useFetchCart 구현](https://github.com/ShinjungOh/2023-learn-react/commit/3ab76dbfa50708e0f7568817828d774b792c315c)
 
-🎯 **장바구니에 상품 담기** 기능을 만들기 전에, 비교적 쉬운 **장바구니 보기** 작업을 먼저 해보기 
+🎯 **장바구니에 상품 담기** 기능을 만들기 전에, 비교적 쉬운 **장바구니 보기** 작업을 먼저 해보기
+
+![](../../images/week9_5_cart.png)
 
 ### `CartPage.tsx` 작성
 
@@ -207,8 +209,8 @@ curl -X POST https://shop-demo-api-01.fly.dev/cart/line-items \
 ### backdoor
 
 데이터베이스를 초기화해서 다시 테스트할 수 있도록 함  
-백엔드 개발자와 얘기해서 만든 것 
+백엔드 개발자와 얘기해서 만들 것 
 
-🚨 테스트 환경애서만 사용해야 함, 실제 서비스에선 절대 나가면 안됨 
+🚨 테스트 환경에서만 사용해야 함, 실제 서비스에선 절대 나가면 안됨 
 
 

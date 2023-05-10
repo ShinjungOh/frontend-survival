@@ -9,6 +9,8 @@
 * 상품을 찾을 수 없는 경우를 따로 구분해서 표현하면 좋음
 * 지금은 구분하지 않고 그냥 일반 에러로 표시할 것 
 
+![](../../images/week9_4_detail.png)
+
 ### `ProductDetailPage.tsx` 작성
 
 useFetchProduct에서 loading과 error를 받아 화면에 표현하기
@@ -19,7 +21,7 @@ useFetchProduct에서 loading과 error를 받아 화면에 표현하기
 
 ### useProductDetailStore hook 생성 
 
-* src/stores
+* src/hooks
 * tsyringe의 container를 이용해 `ProductDetailStore`를 활용
 
 ```tsx
@@ -30,6 +32,8 @@ export default function useProductDetailStore() {
 ```
 
 ### `ProductDetailStore.ts` 생성 
+
+* src/stores
 
 #### 구현 내용 
 
@@ -52,7 +56,7 @@ export default function useProductDetailStore() {
 // 초기값을 null로 잡을 수 있음 
 product: ProductDetail | null = null;
 
-// null을 계속 체크해야하거나 에러를 피하기 위해 ✅
+// null을 계속 체크해야하는 상황이나 에러를 피하기 위해 사용 ✅
 product: ProductDetail = nullProductDetail;
 ```
 
