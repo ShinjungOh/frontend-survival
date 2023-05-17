@@ -89,11 +89,18 @@ const token = base64urlEncoding(header) + '.' + base64urlEncoding(payload) + '.'
 
 프론트엔드 입장에서 로그인은 사용자의 username(여기서는 email)과 password를 백엔드로 전송해서
 **Access Token**(여기서는 JWT를 사용)를 얻는 과정
-이렇게 얻은 Access Token을 관리하는 방법은 여러 가지가 있지만, 여기서는 usehooks-ts의 useLocalStorage를 사용해서 전역적으로 동기화
+
+* username/email : 이 사람은 누구이다(unique)
+* password : unique함을 증명하는 암호 
+* Access Token : 사용자가 증명되었으면 앞으로 계속 password 입력하지 말고 토큰을 들고오면 됨
+  * 매 요청마다 토큰을 넣어서 전달  
+
+이렇게 얻은 Access Token을 관리하는 방법은 여러 가지가 있음(쿠키, 세션 등)  
+여기서는 usehooks-ts의 useLocalStorage를 사용해서 전역적으로 동기화
 
 ### `LoginPage` 생성
 
-`LoginForm`과 `LoginFormStore`를 사용하고, Access Token이 바뀌었을 때 홈(/)으로 리다이렉션
+`LoginForm`과 `LoginFormStore`를 사용하고, Access Token이 바뀌었을 때(로그인 성공 시) 홈(/)으로 리다이렉션
 
 ```tsx
 import { useEffect } from 'react';
