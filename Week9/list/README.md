@@ -99,6 +99,10 @@ export default function Products({ products }: ProductsProps) {
 
 ### numberFormat 유틸리티 함수 구현  
 
+[Intl.NumberFormat](https://developer.mozilla.org/ko/docs/web/javascript/reference/global_objects/intl/numberformat)
+
+언어에 맞는 숫자 서식을 지원하는 객체의 생성자
+
 > 🌎 [Intl](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Intl)  
 > 각 언어에 맞는 문자비교, 숫자, 시간, 날짜비교를 제공하는, ECMAScript 국제화 API를 위한 네임 스페이스  
 > 원하는대로 커스텀이 가능 

@@ -99,7 +99,7 @@ export default function useCounterStore() {
 
 <br>
 
-## 2. usesotre-ts
+## 2. usestore-ts
 
 [usestore-ts](https://usestore-ts.com/)
 
@@ -170,7 +170,16 @@ export default function useCounterStore() {
 }
 ```
 
+#### 사용 방법 예시 
+
+```tsx
+const [{ count }, store] = useStore(counterStore);
+```
+
+첫번째 인자로 스토어의 값, 두번째 인자로 스토어 자체가 반환
+
 #### 불러와서 사용하기
+
 
 ```tsx
 // Counter.tsx
