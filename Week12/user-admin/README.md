@@ -5,7 +5,7 @@
 🎯 관리자 사이트는 무조건 로그인 필수   
 일반 페이지와 로그인 페이지를 완전히 분리하기 
 
-### `routes.tsx`
+### `routes.tsx` 생성 
 
 ```tsx
 const routes = [
