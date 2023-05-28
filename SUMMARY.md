@@ -73,3 +73,4 @@
   * [3. 카테고리 관리](Week12/category-admin/README.md)
   * [4. 주문 관리](Week12/order-admin/README.md)
   * [5. 상품 관리](Week12/product-admin/README.md)
+  * [한 주를 마치며](Week12/회고/README.md)
