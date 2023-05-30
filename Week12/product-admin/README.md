@@ -131,14 +131,177 @@ export default function Description({ value }: DescriptionProps) {
 여기까지는 특별한 게 없음      
 🎯 상품 추가/수정 기능에서 **데이터 구조를 동적으로 조정하기 위한 Store**를 준비하고, 그 다음에 **화면 꾸미기**
 
+### 테스트 코드 작성 
+
+스토어 구현에 앞서 테스트 코드 작성  
+
+💡 불안할수록 구체적으로 작성할 것 
+
+<details>
+<summary>테스트 코드</summary>
+
+```ts
+import ProductFormStore from './ProductFormStore';
+
+import fixtures from '../../fixtures';
+
+const createProduct = jest.fn();
+const updateProduct = jest.fn();
+
+jest.mock('../services/ApiService', () => ({
+    get apiService() {
+        return {
+            createProduct,
+            updateProduct,
+        };
+    },
+}));
+
+const context = describe;
+
+describe('ProductFormStore', () => {
+    let store: ProductFormStore;
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+
+        store = new ProductFormStore();
+    });
+
+    describe('toggleHidden', () => {
+        it('changes “hidden” to true and false alternately', () => {
+            expect(store.hidden).toBeFalsy();
+
+            store.toggleHidden();
+
+            expect(store.hidden).toBeTruthy();
+
+            store.toggleHidden();
+
+            expect(store.hidden).toBeFalsy();
+        });
+    });
+
+    describe('create', () => {
+        const [category] = fixtures.categories;
+
+        beforeEach(() => {
+            store.reset();
+
+            store.changeCategory(category);
+            store.changeName('New Product');
+            store.changePrice('123400');
+            store.changeDescription('What is this?');
+
+            store.changeImageUrl(0, 'http://example.com/images/01.jpg');
+            store.addImage();
+            store.changeImageUrl(1, 'http://example.com/images/02.jpg');
+            store.removeImage(1);
+
+            expect(store.images).toHaveLength(1);
+
+            store.addOption();
+            store.addOption();
+            store.addOption();
+            store.removeOption(2);
+            store.changeOptionName(0, 'Color');
+            store.changeOptionName(1, 'Size');
+
+            expect(store.options).toHaveLength(2);
+
+            store.addOptionItem(0);
+            store.addOptionItem(0);
+            // 숫자만 연속되는 부분이  혼란스러우면 object를 이용해 Named Parameter처럼 꾸며주자.
+            store.removeOptionItem(0, 2);
+            store.changeOptionItemName(0, 0, 'Black');
+            store.changeOptionItemName(0, 1, 'White');
+
+            expect(store.options[0].items).toHaveLength(2);
+
+            store.changeOptionItemName(1, 0, 'Free');
+
+            expect(store.valid).toBeTruthy();
+
+            store.toggleHidden();
+        });
+
+        context('when API responds with success', () => {
+            it('sets done is true', async () => {
+                await store.create();
+
+                expect(createProduct).toBeCalled();
+
+                expect(store.done).toBeTruthy();
+                expect(store.error).toBeFalsy();
+            });
+        });
+
+        context('when API responds with error', () => {
+            beforeEach(() => {
+                createProduct.mockRejectedValue(Error('Create Product API error!'));
+            });
+
+            it('sets error is true', async () => {
+                await store.create();
+
+                expect(createProduct).toBeCalled();
+
+                expect(store.done).toBeFalsy();
+                expect(store.error).toBeTruthy();
+            });
+        });
+    });
+
+    describe('update', () => {
+        const [product] = fixtures.products;
+
+        beforeEach(() => {
+            store.setProduct(JSON.parse(JSON.stringify(product)));
+
+            store.changeName('New Name');
+        });
+
+        context('when API responds with success', () => {
+            it('sets done is true', async () => {
+                await store.update();
+
+                expect(updateProduct).toBeCalled();
+
+                expect(store.done).toBeTruthy();
+                expect(store.error).toBeFalsy();
+            });
+        });
+
+        context('when API responds with error', () => {
+            beforeEach(() => {
+                updateProduct.mockRejectedValue(Error('Update Product API error!'));
+            });
+
+            it('sets error is true', async () => {
+                await store.update();
+
+                expect(updateProduct).toBeCalled();
+
+                expect(store.done).toBeFalsy();
+                expect(store.error).toBeTruthy();
+            });
+        });
+    });
+});
+```
+
+</details>
+
 ### ProductFormStore 생성 
 
-상품 추가/수정에서 공통으로 사용할 스토어를 생성 
+상품 추가/수정에서 공통으로 사용할 스토어를 생성
 
-> 💡 원하는 상황을 테스트 코드로 묘사 → 테스트가 통과하도록 구현 해보기 
+> 💡 원하는 상황을 먼저 테스트 코드로 묘사 → 테스트가 통과하도록 구현 해보기  
+> 단 하나의 테스트만 작성해야 한다면? 스토어 등의 **비즈니스 로직**
 
-
-* `Product`가 `Option`을 갖고, `Option`은 `OptionItem`을 갖는 구조라, 깊이 들어간 배열에 값을 추가하거나 삭제하는 게 쉽지 않다. 유틸리티 함수 append, remove, update를 `src/utils/index.ts` 파일에 추가하자.
+* `Product`가 `Option`을 갖고, `Option`은 `OptionItem`을 갖는 구조   
+  → 깊이 들어간 배열에 값을 추가하거나 삭제하는 게 쉽지 않음 
+* 유틸리티 함수 append, remove, update를 `src/utils/index.ts` 파일에 추가
 
 ```tsx
 export function append<T>(items: T[], item: T) {
@@ -157,7 +320,11 @@ export function update<T>(items: T[], index: number, f: (value: T) => T) {
 }
 ```
 
-`ProductFormStore`를 쉽게 쓰기 위한 훅을 만든다.
+### `useProductFormStore` hook 생성
+
+* hooks/ProductFormStore.ts
+
+ProductFormStore를 쉽게 쓰기 위한 hook 
 
 ```tsx
 import { container } from 'tsyringe';
@@ -218,6 +385,9 @@ export default function ProductNewPage() {
 ```
 
 ### `ProductNewForm` 컴포넌트 구현
+
+고객 사이트와 비슷  
+복잡한 로직은 컴포넌트 분리 
 
 ```tsx
 type ProductNewFormProps = {
@@ -288,10 +458,15 @@ export default function ProductNewForm({
 
 ### `Images` 컴포넌트 구현
 
+* 이미지 삭제
+* 이미지 추가
 
 ### `Options` 컴포넌트 구현
 
 깊이가 더 깊은 옵션도 다뤄야 하기 때문에 `Options` 컴포넌트를 생성 
+
+* 옵션 삭제
+* 옵션 추가
 
 ```tsx
 type OptionsProps = {
@@ -330,6 +505,9 @@ export default function Options({ options, store }: OptionsProps) {
 ```
 
 ### `OptionItems` 컴포넌트 구현 
+
+* 아이템 삭제
+* 아이템 추가
 
 ```tsx
 type OptionItemsProps = {
@@ -373,9 +551,12 @@ export default function OptionItems({
 
 ## 4. 상품 수정
 
+수정은 데이터를 가지고와서 처리해야 하기 때문에 다른 것보다 좀 더 복잡함  
+
 ### `ProductEditPage` 생성 
 
 * `ProductNewPage`와 유사
+* useFetchProduct에서 얻어오기 
 
 ```tsx
 export default function ProductEditPage() {
@@ -419,4 +600,11 @@ export default function ProductEditPage() {
 
 * `ProductNewForm` 컴포넌트와 유사
 * `Images`, `Options` 등은 전부 그대로 재사용
+* 개발 중일 때 hidden 사용 
 * `CheckBox` 컴포넌트는 이번에 처음 등장
+
+
+> 🔎 **팁**
+> 
+> API를 백엔드 개발자와 같이 만드는 것이 중요   
+> 문제점이 있으면 서로 소통해야 함 
