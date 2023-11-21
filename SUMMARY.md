@@ -62,6 +62,7 @@
   * [2. 로그아웃](Week10/logout/README.md)
   * [3. 회원가입](Week10/signup/README.md)
   * [4. 주문 목록 & 주문 상세](Week10/order/README.md)
+  * [한 주를 마치며](Week10/회고/README.md)
 * [11주차](Week11/README.md)
   * [1. 배송 정보 입력](Week11/ShippingForm/README.md)
   * [2. 포트원 결제 요청](Week11/PortOne/README.md)
